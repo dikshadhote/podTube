@@ -53,8 +53,18 @@ input:focus {
   border-radius: 5px;
 }
 
-.d-grid {
+.d-grid-sidebar {
   display: grid;
   grid-template-columns: 1fr 5.5fr;
   grid-column-gap: 10px;
+}
+
+.d-grid-sidebar-mini {
+  display: grid;
+  grid-template-columns: 0.5fr 7.5fr;
+  grid-column-gap: 10px;
+}
+
+.word-wrap {
+  word-wrap: break-word;
 }
