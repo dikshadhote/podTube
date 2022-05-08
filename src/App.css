@@ -1,19 +1,20 @@
 @import "https://dreamui-demo.netlify.app/dreamui-v1.css";
 @import "https://dreamui-v2.netlify.app/dreamui-v1.css";
-@import "./components/Navbar/Navbar.css";
-
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@500&display=swap");
+@import "./components/Navbar/Navbar.css";
+@import "./components/Sidebar/Sidebar.css";
 :root {
   --black-light-shade: #303030;
   --black-dark-background: #282828;
   --red-yt-color: #ff0000;
   --blue-yt-action: #3da0f5;
   --gray-text: #f1e5e5a6;
+  --gray-link-active: #4c4c4c;
 }
 
 body {
   background-color: var(--black-dark-background);
-  font-family: Roboto, Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .red-yt-color {
@@ -50,4 +51,10 @@ input:focus {
 
 .border-radius {
   border-radius: 5px;
+}
+
+.d-grid {
+  display: grid;
+  grid-template-columns: 1fr 5.5fr;
+  grid-column-gap: 10px;
 }

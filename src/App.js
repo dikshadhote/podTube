@@ -1,9 +1,15 @@
 import "./App.css";
-import { Home } from "./components";
+import { Home, Navbar, Sidebar } from "./components";
+import Router from "./router/Router";
 function App() {
   return (
     <div className="App">
-      <Home />
+      <Router />
+      <Navbar />
+      <div className="d-grid ">
+        <Sidebar />
+        <Home />
+      </div>
     </div>
   );
 }
