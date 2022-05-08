@@ -14,7 +14,7 @@ export default function Navbar() {
         <div>
           <div className="border-none search-box d-flex border-radius">
             <input type="text" placeholder="Search" id="search" />
-            <button className="d-flex align-items-center border-none">
+            <button className="d-flex align-items-center border-none cursor-pointer">
               <FiSearch size={20} />
             </button>
           </div>

@@ -28,3 +28,9 @@
   top: -8px;
   left: -5px;
 }
+
+@media screen and (max-width: 600px) {
+  .search-box {
+    display: none;
+  }
+}
