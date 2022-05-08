@@ -1,0 +1,30 @@
+.search-box input {
+  color: var(--gray-text);
+  border: none;
+  background-color: var(--black-dark-background);
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.search-box button {
+  background-color: var(--black-dark-background);
+  color: var(--gray-text);
+  padding: 10px;
+}
+
+.size-yt-triangle {
+  height: 1rem;
+  width: 1rem;
+}
+
+.brand-name {
+  font-family: Roboto Condensed, sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+}
+
+.pos-abs-logo {
+  position: absolute;
+  top: -8px;
+  left: -5px;
+}
