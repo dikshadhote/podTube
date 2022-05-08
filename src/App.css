@@ -1,7 +1,10 @@
 @import "https://dreamui-demo.netlify.app/dreamui-v1.css";
 @import "https://dreamui-v2.netlify.app/dreamui-v1.css";
-body {
-  background-color: var(--black-dark-background);
+:root {
   --black-light-shade: #303030;
   --black-dark-background: #282828;
+}
+
+body {
+  background-color: var(--black-dark-background);
 }
