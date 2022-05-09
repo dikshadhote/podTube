@@ -1,7 +1,73 @@
 @import "https://dreamui-demo.netlify.app/dreamui-v1.css";
 @import "https://dreamui-v2.netlify.app/dreamui-v1.css";
-body {
-  background-color: var(--black-dark-background);
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@500&display=swap");
+@import "./components/Navbar/Navbar.css";
+@import "./components/Sidebar/Sidebar.css";
+:root {
   --black-light-shade: #303030;
   --black-dark-background: #282828;
+  --red-yt-color: #ff0000;
+  --blue-yt-action: #3da0f5;
+  --gray-text: #f1e5e5a6;
+  --gray-link-active: #4c4c4c;
+}
+
+body {
+  background-color: var(--black-dark-background);
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  position: relative;
+}
+.red-yt-color {
+  color: var(--red-yt-color);
+}
+
+.black-light-shade-bg {
+  background-color: var(--black-light-shade);
+}
+
+.pos-relative {
+  position: relative;
+}
+
+.blue-yt-text {
+  color: var(--blue-yt-action);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.gray-text {
+  color: var(--gray-text);
+}
+
+.border-none {
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+.border-radius {
+  border-radius: 5px;
+}
+
+.d-grid-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 5.5fr;
+  grid-column-gap: 10px;
+}
+
+.d-grid-sidebar-mini {
+  display: grid;
+  grid-template-columns: 0.5fr 7.5fr;
+  grid-column-gap: 10px;
+}
+
+.word-wrap {
+  word-wrap: break-word;
 }
