@@ -17,6 +17,9 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.App {
+  position: relative;
+}
 .red-yt-color {
   color: var(--red-yt-color);
 }

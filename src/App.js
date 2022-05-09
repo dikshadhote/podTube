@@ -10,7 +10,6 @@ function App() {
       <Navbar />
       <div className={showSidebar ? "d-grid-sidebar " : "d-grid-sidebar-mini"}>
         {showSidebar ? <Sidebar /> : <SidebarMini />}
-        {showSidebar ? <SidebarMini /> : <SidebarMini />}
         <Home />
       </div>
     </div>

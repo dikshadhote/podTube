@@ -1,5 +1,7 @@
 .sidebar {
   height: 100vh;
+  z-index: 10;
+  top: 3rem;
 }
 
 .icon-margin {
@@ -20,12 +22,13 @@
 
 .sidebar-mini {
   height: 100vh;
-  display: none;
+  z-index: 10;
+  top: 3rem;
 }
 
 @media screen and (max-width: 941px) {
   .sidebar {
-    display: none;
+    width: 9rem;
   }
 
   .sidebar-mini {
