@@ -39,7 +39,26 @@ export const logIn = createAsyncThunk("auth/logIn", async () => {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  extraReducers: {},
+  extraReducers: {
+    [signUp.fulfilled]: (state) => {
+      state.status = "succeeded";
+    },
+    [signUp.rejected]: (state) => {
+      state.status = "failed";
+    },
+    [signUp.pending]: (state) => {
+      state.status = "loading";
+    },
+    [logIn.fulfilled]: (state) => {
+      state.status = "succeeded";
+    },
+    [logIn.rejected]: (state) => {
+      state.status = "failed";
+    },
+    [logIn.pending]: (state) => {
+      state.status = "loading";
+    },
+  },
 });
 
 export default authSlice.reducer;
