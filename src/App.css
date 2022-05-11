@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@500&display=swap");
 @import "./components/Navbar/Navbar.css";
 @import "./components/Sidebar/Sidebar.css";
+@import "./components/Login/Login.css";
 :root {
   --black-light-shade: #303030;
   --black-dark-background: #282828;
@@ -26,6 +27,9 @@ body {
 
 .black-light-shade-bg {
   background-color: var(--black-light-shade);
+}
+.black-dark-bg {
+  background-color: var(--black-dark-background);
 }
 
 .pos-relative {
