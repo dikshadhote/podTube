@@ -3,8 +3,20 @@ import { AiFillYoutube } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSide } from "../../context/sidebar-context";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/reducers/auth/authSlice";
 export default function Navbar() {
   const { toggleSidebar } = useSide();
+  const logoutDispatch = useDispatch();
+  let token = localStorage.getItem("token");
+  const navigateTo = useNavigate();
+
+  const logOutHandler = () => {
+    localStorage.removeItem("token");
+    logoutDispatch(logout());
+    navigateTo("/login");
+  };
   return (
     <div>
       <div className="nav-bar black-light-shade-bg">
@@ -27,12 +39,27 @@ export default function Navbar() {
           </div>
         </div>
         <div className="nav-items">
-          <a className="blue-yt-text d-flex align-items-center cursor-pointer ">
-            <span className="material-icons ml-1 blue-yt-text" title="Sign in">
-              account_circle
+          {token ? (
+            <span
+              className="blue-yt-text d-flex align-items-center cursor-pointer"
+              onClick={() => logOutHandler()}
+            >
+              <p className="ml-1">Log out</p>
             </span>
-            <p className="ml-1">Sign in</p>
-          </a>
+          ) : (
+            <Link
+              className="blue-yt-text d-flex align-items-center cursor-pointer"
+              to="/login"
+            >
+              <span
+                className="material-icons ml-1 blue-yt-text"
+                title="Sign in"
+              >
+                account_circle
+              </span>
+              <p className="ml-1">Login in</p>
+            </Link>
+          )}
         </div>
       </div>
     </div>

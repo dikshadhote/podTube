@@ -29,6 +29,10 @@
   left: -5px;
 }
 
+.nav-bar.black-light-shade-bg {
+  width: 100%;
+}
+
 @media screen and (max-width: 600px) {
   .search-box {
     display: none;
