@@ -1,35 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const token = localStorage.getItem("token");
 
 const initialState = {
-  user: { isUserLoggedin: token ? true : false },
+  user: {},
+  isUserLoggedin: false,
   status: null,
 };
 
-export const signUp = createAsyncThunk("auth/signUp", async () => {
+export const signUp = createAsyncThunk("auth/signUp", async (user) => {
   try {
-    const { data, status } = await axios.post("/api/auth/signup", {
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      password: password,
-    });
+    const { data, status } = await axios.post("/api/auth/signup", user);
     if (status == 201) {
-      return data.encodedToken;
+      const token = localStorage.setItem("token", data.encodedToken);
+      return data;
     }
   } catch (error) {
     return Promise.reject(error);
   }
 });
-export const logIn = createAsyncThunk("auth/logIn", async () => {
+export const logIn = createAsyncThunk("auth/logIn", async (user) => {
   try {
-    const { data, status } = await axios.post("/api/auth/login", {
-      email: email,
-      password: password,
-    });
+    const { data, status } = await axios.post("/api/auth/login", user);
     if (status == 200) {
-      return data.encodedToken;
+      const token = localStorage.setItem("token", data.encodedToken);
+      return data;
     }
   } catch (error) {
     return Promise.reject(error);
@@ -40,8 +34,10 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: {
-    [signUp.fulfilled]: (state) => {
+    [signUp.fulfilled]: (state, action) => {
       state.status = "succeeded";
+      state.user = action.payload.user;
+      state.isUserLoggedin = true;
     },
     [signUp.rejected]: (state) => {
       state.status = "failed";
@@ -49,8 +45,10 @@ export const authSlice = createSlice({
     [signUp.pending]: (state) => {
       state.status = "loading";
     },
-    [logIn.fulfilled]: (state) => {
+    [logIn.fulfilled]: (state, action) => {
       state.status = "succeeded";
+      state.user = action.payload.user;
+      state.isUserLoggedin = true;
     },
     [logIn.rejected]: (state) => {
       state.status = "failed";
