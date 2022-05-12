@@ -15,6 +15,7 @@ export default function Navbar() {
   const logOutHandler = () => {
     localStorage.removeItem("token");
     logoutDispatch(logout());
+    //redirect to login
     navigateTo("/login", { replace: true });
   };
   return (
