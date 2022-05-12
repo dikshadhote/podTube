@@ -4,18 +4,18 @@ import { FiSearch } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSide } from "../../context/sidebar-context";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/reducers/auth/authSlice";
 export default function Navbar() {
   const { toggleSidebar } = useSide();
   const logoutDispatch = useDispatch();
-  let token = localStorage.getItem("token");
-  const navigateTo = useNavigate();
 
+  const navigateTo = useNavigate();
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   const logOutHandler = () => {
     localStorage.removeItem("token");
     logoutDispatch(logout());
-    navigateTo("/login");
+    navigateTo("/login", { replace: true });
   };
   return (
     <div>
@@ -39,7 +39,7 @@ export default function Navbar() {
           </div>
         </div>
         <div className="nav-items">
-          {token ? (
+          {isUserLoggedIn ? (
             <span
               className="blue-yt-text d-flex align-items-center cursor-pointer"
               onClick={() => logOutHandler()}

@@ -35,14 +35,13 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state = initialState;
+      state.isUserLoggedin = false;
     },
   },
   extraReducers: {
     [signUp.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.user = action.payload.user;
-      state.isUserLoggedin = true;
+      state.user = action.payload.foundUser;
     },
     [signUp.rejected]: (state) => {
       state.status = "failed";
@@ -52,7 +51,7 @@ export const authSlice = createSlice({
     },
     [logIn.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.user = action.payload.user;
+      state.user = action.payload.foundUser;
       state.isUserLoggedin = true;
     },
     [logIn.rejected]: (state) => {
