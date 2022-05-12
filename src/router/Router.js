@@ -24,9 +24,22 @@ export default function Router() {
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route exact path="/history" element={<History />} />
-          <Route path="/favourite" element={<LikeVideos />} />
-          <Route path="/watchlater" element={<WatchLater />} />
+          <Route
+            path="/history"
+            element={<PrivateRoute navigateToPath={<History />}></PrivateRoute>}
+          />
+          <Route
+            path="/favourite"
+            element={
+              <PrivateRoute navigateToPath={<LikeVideos />}></PrivateRoute>
+            }
+          />
+          <Route
+            path="/watchlater"
+            element={
+              <PrivateRoute navigateToPath={<WatchLater />}></PrivateRoute>
+            }
+          />
         </Routes>
       </div>
     </>
