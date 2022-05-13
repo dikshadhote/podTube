@@ -1,0 +1,16 @@
+.card-img-vert.yt-card {
+  min-width: 14rem;
+}
+
+.card-subtitle.xs-font {
+  font-size: 12px;
+}
+
+p.white-text-color.duration {
+  position: absolute;
+  padding: 5px;
+  bottom: 5.2rem;
+  right: 10px;
+
+  background-color: var(--black-dark-background);
+}
