@@ -1,21 +1,24 @@
 @import "https://dreamui-demo.netlify.app/dreamui-v1.css";
 @import "https://dreamui-v2.netlify.app/dreamui-v1.css";
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 @import "./components/Navbar/Navbar.css";
 @import "./components/Sidebar/Sidebar.css";
 @import "./components/Login/Login.css";
+@import "./components/Home/Home.css";
 :root {
-  --black-light-shade: #303030;
-  --black-dark-background: #282828;
+  --black-light-shade: #212121;
+  --black-dark-background: #181818;
   --red-yt-color: #ff0000;
   --blue-yt-action: #3da0f5;
   --gray-text: #f1e5e5a6;
   --gray-link-active: #4c4c4c;
+  --transparent-black: #29211c;
 }
 
 body {
   background-color: var(--black-dark-background);
-  font-family: Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .App {
@@ -74,4 +77,9 @@ input:focus {
 
 .word-wrap {
   word-wrap: break-word;
+}
+
+.overflow-y {
+  overflow-y: auto;
+  height: 100vh;
 }
