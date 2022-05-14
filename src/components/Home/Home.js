@@ -17,6 +17,9 @@ export default function Home() {
     dispatch(getCategories());
   }, [dispatch]);
 
+  useEffect(() => {
+    setFilteredList(videos);
+  }, [videos]);
   const handleShowPanel = (inputId) => {
     showSaveid(inputId);
     const videoPresent = videos.some((video) => video._id === inputId);
@@ -25,11 +28,29 @@ export default function Home() {
       setShowPanel(true);
     }
   };
+  const sortByTag = (videos, categoryName) => {
+    console.log(videos);
+    let filterArr = videos.filter((video) => {
+      const category = video.categoryName.toLowerCase();
+      const selectedCategory = categoryName.toLowerCase();
+      if (category === selectedCategory) {
+        return video;
+      }
+    });
+    console.log(filterArr, categoryName);
+    setFilteredList(filterArr);
+    if (categoryName === "all") {
+      setFilteredList(videos);
+    }
+  };
 
   return (
     <div className="d-flex flex-column">
       <div className="mt-3 mb-1 gray-border-chip-container pb-2 pt-2">
-        <span className="card-category-txt  white-text-color cursor-pointer">
+        <span
+          className="card-category-txt  white-text-color cursor-pointer"
+          onClick={() => sortByTag(videos, "all")}
+        >
           All
         </span>
         {categories.map(({ categoryName }, idx) => {
@@ -37,6 +58,7 @@ export default function Home() {
             <span
               className="card-category-txt  white-text-color cursor-pointer"
               key={idx}
+              onClick={() => sortByTag(videos, categoryName)}
             >
               {categoryName}
             </span>
@@ -44,7 +66,7 @@ export default function Home() {
         })}
       </div>
       <div className="d-flex flex-wrap">
-        {videos.map(
+        {filteredList?.map(
           ({ title, thumbUrl, creator, views, duration, avatar, _id }) => {
             return (
               <div
