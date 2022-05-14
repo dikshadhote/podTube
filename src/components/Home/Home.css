@@ -28,3 +28,21 @@ p.white-text-color.duration {
   border-top: 0.5px solid var(--gray-link-active);
   border-bottom: 0.5px solid var(--gray-link-active);
 }
+
+.popup-threedot {
+  position: absolute;
+  z-index: 7;
+  bottom: -4rem;
+  right: -12rem;
+  background-color: var(--black-light-shade);
+  padding: 1rem;
+  min-width: 15rem;
+}
+
+.dispaly-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
