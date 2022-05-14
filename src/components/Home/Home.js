@@ -29,7 +29,6 @@ export default function Home() {
     }
   };
   const sortByTag = (videos, categoryName) => {
-    console.log(videos);
     let filterArr = videos.filter((video) => {
       const category = video.categoryName.toLowerCase();
       const selectedCategory = categoryName.toLowerCase();
@@ -37,7 +36,7 @@ export default function Home() {
         return video;
       }
     });
-    console.log(filterArr, categoryName);
+
     setFilteredList(filterArr);
     if (categoryName === "all") {
       setFilteredList(videos);
