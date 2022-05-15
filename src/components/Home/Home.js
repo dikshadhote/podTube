@@ -55,11 +55,7 @@ export default function Home() {
         {categories.map(({ categoryName }, idx) => {
           return (
             <span
-              className={
-                activeTag
-                  ? "card-category-txt  white-text-color cursor-pointer link-active-bg"
-                  : "card-category-txt  white-text-color cursor-pointer"
-              }
+              className="card-category-txt  white-text-color cursor-pointer"
               key={idx}
               onClick={() => sortByTag(videos, categoryName)}
             >
