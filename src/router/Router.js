@@ -16,32 +16,38 @@ import PrivateRoute from "./PrivateRoute";
 export default function Router() {
   const { showSidebar } = useSide();
   return (
-    <>
+    <div className="pos-relative">
       <Navbar />
-      <div className={showSidebar ? "d-grid-sidebar " : "d-grid-sidebar-mini"}>
-        {showSidebar ? <Sidebar /> : <SidebarMini />}
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route
-            path="/history"
-            element={<PrivateRoute navigateToPath={<History />}></PrivateRoute>}
-          />
-          <Route
-            path="/favourite"
-            element={
-              <PrivateRoute navigateToPath={<LikeVideos />}></PrivateRoute>
-            }
-          />
-          <Route
-            path="/watchlater"
-            element={
-              <PrivateRoute navigateToPath={<WatchLater />}></PrivateRoute>
-            }
-          />
-        </Routes>
+      <div>
+        <div className="sidebar">
+          {showSidebar ? <Sidebar /> : <SidebarMini />}
+        </div>
+        <div className="video-chips-container">
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/history"
+              element={
+                <PrivateRoute navigateToPath={<History />}></PrivateRoute>
+              }
+            />
+            <Route
+              path="/favourite"
+              element={
+                <PrivateRoute navigateToPath={<LikeVideos />}></PrivateRoute>
+              }
+            />
+            <Route
+              path="/watchlater"
+              element={
+                <PrivateRoute navigateToPath={<WatchLater />}></PrivateRoute>
+              }
+            />
+          </Routes>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -45,7 +45,7 @@ export default function Home() {
 
   return (
     <div className="d-flex flex-column">
-      <div className="mt-3 mb-1 gray-border-chip-container pb-2 pt-2">
+      <div className="mt-3 mb-1 ml-3 gray-border-chip-container pb-2 pt-2">
         <span
           className="card-category-txt  white-text-color cursor-pointer"
           onClick={() => sortByTag(videos, "all")}
@@ -74,7 +74,7 @@ export default function Home() {
               >
                 <div className="">
                   <img
-                    className="card-img-vert pos-relative yt-card "
+                    className="card-img-vert pos-relative yt-card responsive-img "
                     src={thumbUrl}
                     alt="thumbnail"
                   />

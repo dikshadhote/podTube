@@ -84,3 +84,8 @@ input:focus {
   overflow-y: auto;
   height: 100vh;
 }
+
+.video-chips-container {
+  margin-top: 4.5rem;
+  margin-left: 10rem;
+}
