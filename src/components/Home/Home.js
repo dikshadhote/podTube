@@ -55,7 +55,11 @@ export default function Home() {
         {categories.map(({ categoryName }, idx) => {
           return (
             <span
-              className="card-category-txt  white-text-color cursor-pointer"
+              className={
+                activeTag
+                  ? "card-category-txt  white-text-color cursor-pointer link-active-bg"
+                  : "card-category-txt  white-text-color cursor-pointer"
+              }
               key={idx}
               onClick={() => sortByTag(videos, categoryName)}
             >
@@ -72,14 +76,12 @@ export default function Home() {
                 className="card flex-column card-vert black-dark-bg border-none cursor-pointer"
                 key={_id}
               >
-                <div className="">
-                  <img
-                    className="card-img-vert pos-relative yt-card responsive-img "
-                    src={thumbUrl}
-                    alt="thumbnail"
-                  />
-                  <p className="duration  white-text-color">{duration}</p>
-                </div>
+                <img
+                  className="card-img-vert pos-relative yt-card responsive-img "
+                  src={thumbUrl}
+                  alt="thumbnail"
+                />
+                <p className="duration  white-text-color">{duration}</p>
 
                 <div className="card-body pt-1">
                   <div className="d-flex flex-justify-space-between">
