@@ -6,6 +6,12 @@
   padding: 10px;
 }
 
+.nav-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 12;
+}
 .search-box button {
   background-color: var(--black-dark-background);
   color: var(--gray-text);
