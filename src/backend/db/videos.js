@@ -107,7 +107,7 @@ export const videos = [
   },
   {
     _id: uuid(),
-    title: "India's Youngest Billionare on How to make money",
+    title: "Billionare on How to make money",
     videoUrl: "https://www.youtube.com/watch?v=cpg78ouK54I",
     categoryName: "Finance",
     creator: "Raj Shamani",

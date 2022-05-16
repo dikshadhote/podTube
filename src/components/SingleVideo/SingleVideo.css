@@ -1,2 +1,29 @@
 .grid-layout-singlev {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  grid-column-gap: 10px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.video-wrapper {
+  flex-grow: 1;
+}
+.react-player iframe {
+  height: 25rem;
+}
+
+.card-subtitle.hori-subt {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.hori-duration {
+  position: absolute;
+  bottom: 1rem;
+  right: 10px;
+
+  background-color: var(--black-dark-background);
 }
