@@ -11,6 +11,7 @@ import {
   Navbar,
   Sidebar,
   SidebarMini,
+  SingleVideo,
 } from "../components";
 import PrivateRoute from "./PrivateRoute";
 export default function Router() {
@@ -25,6 +26,7 @@ export default function Router() {
         <div className="video-chips-container">
           <Routes>
             <Route exact path="/" element={<Home />} />
+            <Route path="/singlevideo/:videoid" element={<SingleVideo />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route

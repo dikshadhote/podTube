@@ -4,6 +4,7 @@ import { getVideos } from "../../redux/reducers/video-listing/videosSlice";
 import { getCategories } from "../../redux/reducers/video-listing/categorySlice";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdVideoLibrary, MdThumbUp } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 export default function Home() {
   const videos = useSelector((state) => state.video.videos);
   const categories = useSelector((state) => state.categories.categories);
@@ -68,9 +69,10 @@ export default function Home() {
         {filteredList?.map(
           ({ title, thumbUrl, creator, views, duration, avatar, _id }) => {
             return (
-              <div
+              <NavLink
                 className="card flex-column card-vert black-dark-bg border-none cursor-pointer"
                 key={_id}
+                to={`/singlevideo/${_id}`}
               >
                 <img
                   className="card-img-vert pos-relative yt-card responsive-img "
@@ -125,7 +127,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </NavLink>
             );
           }
         )}
