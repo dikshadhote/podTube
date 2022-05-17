@@ -27,3 +27,14 @@
 
   background-color: var(--black-dark-background);
 }
+
+.rec-img.flex-shrink {
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .grid-layout-singlev {
+    display: flex;
+    flex-direction: column;
+  }
+}

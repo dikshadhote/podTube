@@ -74,16 +74,18 @@ export default function SingleVideo() {
           ({ title, thumbUrl, creator, views, duration, _id }) => {
             return (
               <NavLink className="d-flex" key={_id} to={`/singlevideo/${_id}`}>
-                <div className="card-img-hori pos-relative">
+                <div className="card-img-hori pos-relative rec-img flex-shrink">
                   <img
                     src={thumbUrl}
-                    className="responsive-img img-hori  yt-card"
+                    className="responsive-img img-hori  yt-card  "
                     alt="thumbnail"
                   />
                   <p className=" hori-duration white-text-color">{duration}</p>
                 </div>
                 <div className="d-flex flex-column ml-1">
-                  <p className=" white-text-color mt-1 word-wrap">{title}</p>
+                  <p className=" white-text-color mt-1 word-wrap text-overflow rec-text">
+                    {title}
+                  </p>
                   <small className="card-subtitle mt-1 hori-subt">
                     {creator}
                   </small>

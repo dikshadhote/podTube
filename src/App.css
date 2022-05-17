@@ -94,3 +94,10 @@ input:focus {
 .link-active-bg {
   background-color: var(--gray-link-active);
 }
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
