@@ -9,19 +9,13 @@ export default function SingleVideo() {
   let { videoid } = useParams();
   const videos = useSelector((state) => state.video.videos);
 
-  console.log(videos);
   let filteredVideo = videos.find((video) => video._id === videoid);
-  console.log(filteredVideo);
-  //   const {
-  //     avatar,
-  //     categoryName,
-  //     creator,
-  //     description,
-  //     thumbUrl,
-  //     title,
-  //     videoUrl,
-  //     views,
-  //   } = filteredVideo;
+  let recommendationList = videos.filter(
+    (video) =>
+      video.categoryName === filteredVideo.categoryName &&
+      video._id !== filteredVideo._id
+  );
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getVideos());
@@ -76,29 +70,31 @@ export default function SingleVideo() {
       </div>
 
       <div>
-        {videos.map(({ title, thumbUrl, creator, views, duration, _id }) => {
-          return (
-            <div className="d-flex" key={_id}>
-              <div className="card-img-hori pos-relative">
-                <img
-                  src={thumbUrl}
-                  className="responsive-img img-hori  yt-card"
-                  alt="thumbnail"
-                />
-                <p className=" hori-duration white-text-color">{duration}</p>
+        {recommendationList.map(
+          ({ title, thumbUrl, creator, views, duration, _id }) => {
+            return (
+              <div className="d-flex" key={_id}>
+                <div className="card-img-hori pos-relative">
+                  <img
+                    src={thumbUrl}
+                    className="responsive-img img-hori  yt-card"
+                    alt="thumbnail"
+                  />
+                  <p className=" hori-duration white-text-color">{duration}</p>
+                </div>
+                <div className="d-flex flex-column ml-1">
+                  <p className=" white-text-color mt-1 word-wrap">{title}</p>
+                  <small className="card-subtitle mt-1 hori-subt">
+                    {creator}
+                  </small>
+                  <p className="card-subtitle hori-subt xs-font ">
+                    {views + " "}views
+                  </p>
+                </div>
               </div>
-              <div className="d-flex flex-column ml-1">
-                <p className=" white-text-color mt-1 word-wrap">{title}</p>
-                <small className="card-subtitle mt-1 hori-subt">
-                  {creator}
-                </small>
-                <p className="card-subtitle hori-subt xs-font ">
-                  {views + " "}views
-                </p>
-              </div>
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </div>
     </div>
   );
