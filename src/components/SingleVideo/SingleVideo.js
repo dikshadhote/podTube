@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { getVideos } from "../../redux/reducers/video-listing/videosSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -73,7 +73,7 @@ export default function SingleVideo() {
         {recommendationList.map(
           ({ title, thumbUrl, creator, views, duration, _id }) => {
             return (
-              <div className="d-flex" key={_id}>
+              <NavLink className="d-flex" key={_id} to={`/singlevideo/${_id}`}>
                 <div className="card-img-hori pos-relative">
                   <img
                     src={thumbUrl}
@@ -91,7 +91,7 @@ export default function SingleVideo() {
                     {views + " "}views
                   </p>
                 </div>
-              </div>
+              </NavLink>
             );
           }
         )}
