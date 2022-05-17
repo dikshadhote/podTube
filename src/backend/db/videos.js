@@ -2,7 +2,7 @@
  * Videos Database can be added here.
  * You can add videos of your wish with different attributes
  * */
-import { v4 as uuid } from "uuid";
+
 import {
   avatar1,
   avatar2,
@@ -29,7 +29,7 @@ import {
 } from "../../assets";
 export const videos = [
   {
-    _id: uuid(),
+    _id: "37UhELFvPec",
     title: "Power of Fitness",
     categoryName: "Health",
     videoUrl: "https://youtu.be/37UhELFvPec",
@@ -43,7 +43,7 @@ export const videos = [
   },
 
   {
-    _id: uuid(),
+    _id: "J0cD6Mqe944",
     title: "Financial basics for Indians",
     categoryName: "Finance",
     videoUrl: " https://youtu.be/J0cD6Mqe944",
@@ -56,7 +56,7 @@ export const videos = [
     views: "2M",
   },
   {
-    _id: uuid(),
+    _id: "lCrMAtbBUJA",
     title: "15 Books to read in 2022",
     videoUrl: "https://www.youtube.com/watch?v=lCrMAtbBUJA",
     categoryName: "Books",
@@ -68,7 +68,7 @@ export const videos = [
     views: "50k",
   },
   {
-    _id: uuid(),
+    _id: "8so1WZ4j1oQ",
     title: "The exercise paradox",
     videoUrl: "https://youtu.be/8so1WZ4j1oQ",
     categoryName: "Health",
@@ -81,7 +81,7 @@ export const videos = [
     views: "4.4k",
   },
   {
-    _id: uuid(),
+    _id: "TZqOsVCNM",
     title: "Get rich without getting lucky",
     categoryName: "Finance",
     videoUrl: " https://www.youtube.com/watch?v=1-TZqOsVCNM",
@@ -93,7 +93,7 @@ export const videos = [
     views: "67k",
   },
   {
-    _id: uuid(),
+    _id: "oxx564hMBUI",
     title: "What is mental health?",
     videoUrl: "https://www.youtube.com/watch?v=oxx564hMBUI",
     categoryName: "Health",
@@ -106,7 +106,7 @@ export const videos = [
     views: "12k",
   },
   {
-    _id: uuid(),
+    _id: "cpg78ouK54I",
     title: "Billionare on How to make money",
     videoUrl: "https://www.youtube.com/watch?v=cpg78ouK54I",
     categoryName: "Finance",
@@ -119,7 +119,7 @@ export const videos = [
     views: "1.5M",
   },
   {
-    _id: uuid(),
+    _id: "EjsTWJ7U1rk",
     title: "Atomic habbits Summary",
     videoUrl: "https://www.youtube.com/watch?v=EjsTWJ7U1rk",
     categoryName: "Books",
@@ -131,7 +131,7 @@ export const videos = [
     views: "3k",
   },
   {
-    _id: uuid(),
+    _id: "DxIDKZHW3-E",
     title: "We all have mental health",
     videoUrl: "https://youtu.be/DxIDKZHW3-E",
     categoryName: "Health",
@@ -144,7 +144,7 @@ export const videos = [
     views: "34.39k",
   },
   {
-    _id: uuid(),
+    _id: "PU4zArf71Yg",
     title: "Building a side Projects",
     videoUrl: "https://youtu.be/PU4zArf71Yg",
     categoryName: "Technology",
@@ -157,7 +157,7 @@ export const videos = [
     views: "80k",
   },
   {
-    _id: uuid(),
+    _id: "3UF0ymVdYLA",
     title: "Stock market for beginners",
     videoUrl: "https://www.youtube.com/watch?v=3UF0ymVdYLA",
     categoryName: "Finance",
@@ -170,7 +170,7 @@ export const videos = [
     views: "46K",
   },
   {
-    _id: uuid(),
+    _id: "qeMmxq0MT6g",
     title: "Easy explaination of Blockchain",
     videoUrl: "https://youtu.be/qeMmxq0MT6g",
     categoryName: "Technology",
@@ -183,7 +183,7 @@ export const videos = [
   },
 
   {
-    _id: uuid(),
+    _id: "nbrkmJTuGoY",
     title: "Personal Financial Stratergies 2021",
     videoUrl: "https://www.youtube.com/watch?v=nbrkmJTuGoY",
     categoryName: "Finance",
@@ -196,7 +196,7 @@ export const videos = [
     views: "56K",
   },
   {
-    _id: uuid(),
+    _id: "KXgBQS9Lbl8&t=105s",
     title: "Book You must read if you hate reading",
     videoUrl: "https://www.youtube.com/watch?v=KXgBQS9Lbl8&t=105s",
     categoryName: "Books",
@@ -208,7 +208,7 @@ export const videos = [
     views: "3M",
   },
   {
-    _id: uuid(),
+    _id: "cyC6O81Bk",
     title: "Habits of efficient developers",
     videoUrl: "https://youtu.be/9-cyC6O81Bk",
     categoryName: "Technology",
@@ -221,7 +221,7 @@ export const videos = [
     views: "65k",
   },
   {
-    _id: uuid(),
+    _id: "vGad9MvQEwo",
     title: "Best diet for mental and brain health",
     videoUrl: "https://youtu.be/vGad9MvQEwo",
     categoryName: "Health",
@@ -235,7 +235,7 @@ export const videos = [
   },
 
   {
-    _id: uuid(),
+    _id: "LLdKcFpHgM8",
     title: "Financial planning for beginners",
     videoUrl: "https://youtu.be/LLdKcFpHgM8",
     categoryName: "Finance",
@@ -247,7 +247,7 @@ export const videos = [
     views: "14k",
   },
   {
-    _id: uuid(),
+    _id: "zIwLWfaAg-8",
     title: "The future we are building-Elon Musk",
     videoUrl: "https://youtu.be/zIwLWfaAg-8",
     categoryName: "Technology",
@@ -260,7 +260,7 @@ export const videos = [
     views: "8M",
   },
   {
-    _id: uuid(),
+    _id: "zAS1nXFqBM8",
     title: "Steve Jobs favourite books",
     videoUrl: "https://www.youtube.com/watch?v=zAS1nXFqBM8",
     categoryName: "Book",

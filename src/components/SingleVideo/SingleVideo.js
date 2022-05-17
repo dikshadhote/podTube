@@ -10,18 +10,18 @@ export default function SingleVideo() {
   const videos = useSelector((state) => state.video.videos);
 
   console.log(videos);
-  let filteredVideo = videos.filter((video) => video._id === videoid);
+  let filteredVideo = videos.find((video) => video._id === videoid);
   console.log(filteredVideo);
-  const {
-    avatar,
-    categoryName,
-    creator,
-    description,
-    thumbUrl,
-    title,
-    videoUrl,
-    views,
-  } = filteredVideo[0];
+  //   const {
+  //     avatar,
+  //     categoryName,
+  //     creator,
+  //     description,
+  //     thumbUrl,
+  //     title,
+  //     videoUrl,
+  //     views,
+  //   } = filteredVideo;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getVideos());
@@ -32,7 +32,7 @@ export default function SingleVideo() {
       <div>
         <div className="video-wrapper">
           <ReactPlayer
-            url={videoUrl}
+            url={filteredVideo?.videoUrl}
             className="react-player"
             width="100%"
             height="100%"
@@ -41,10 +41,14 @@ export default function SingleVideo() {
         </div>
         <div className="gray-bottom-border p-1">
           <div>
-            <p className=" white-text-color mt-1 word-wrap mt-2">{title}</p>
+            <p className=" white-text-color mt-1 word-wrap mt-2">
+              {filteredVideo?.title}
+            </p>
           </div>
           <div className="d-flex flex-justify-space-between align-items-center mt-1">
-            <p className="card-subtitle hori-subt ">{views} views</p>
+            <p className="card-subtitle hori-subt ">
+              {filteredVideo?.views} views
+            </p>
             <div className="d-flex">
               <BiLike size={20} className="white-text-color" />
               <RiPlayListAddFill size={20} className="white-text-color" />
@@ -53,13 +57,19 @@ export default function SingleVideo() {
         </div>
         <div className="gray-bottom-border p-1 d-flex align-items-center">
           <div className="mr-1">
-            <img src={avatar} className="avatar avatar-xs " alt="avatar" />
+            <img
+              src={filteredVideo?.avatar}
+              className="avatar avatar-xs "
+              alt="avatar"
+            />
           </div>
           <div className="d-flex flex-column">
             <p className=" white-text-color mt-1 word-wrap mt-2 fs-1">
-              {creator}
+              {filteredVideo?.creator}
             </p>
-            <p className=" white-text-color mt-2">{description}</p>
+            <p className=" white-text-color mt-2">
+              {filteredVideo?.description}
+            </p>
           </div>
           <div></div>
         </div>
