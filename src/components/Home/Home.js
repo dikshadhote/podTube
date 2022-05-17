@@ -72,7 +72,7 @@ export default function Home() {
               <NavLink
                 className="card flex-column card-vert black-dark-bg border-none cursor-pointer"
                 key={_id}
-                to={`/singlevideo/${_id}`}
+                to={`/video/${_id}`}
               >
                 <img
                   className="card-img-vert pos-relative yt-card responsive-img "

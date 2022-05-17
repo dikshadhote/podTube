@@ -73,7 +73,7 @@ export default function SingleVideo() {
         {recommendationList.map(
           ({ title, thumbUrl, creator, views, duration, _id }) => {
             return (
-              <NavLink className="d-flex" key={_id} to={`/singlevideo/${_id}`}>
+              <NavLink className="d-flex" key={_id} to={`/video/${_id}`}>
                 <div className="card-img-hori pos-relative rec-img flex-shrink">
                   <img
                     src={thumbUrl}

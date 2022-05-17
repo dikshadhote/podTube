@@ -26,7 +26,7 @@ export default function Router() {
         <div className="video-chips-container">
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route path="/singlevideo/:videoid" element={<SingleVideo />} />
+            <Route path="/video/:videoid" element={<SingleVideo />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route
