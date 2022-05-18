@@ -69,18 +69,18 @@ export default function Home() {
         {filteredList?.map(
           ({ title, thumbUrl, creator, views, duration, avatar, _id }) => {
             return (
-              <NavLink
-                className="card flex-column card-vert black-dark-bg border-none cursor-pointer"
+              <div
+                className="card flex-column card-vert black-dark-bg border-none"
                 key={_id}
-                to={`/video/${_id}`}
               >
-                <img
-                  className="card-img-vert pos-relative yt-card responsive-img "
-                  src={thumbUrl}
-                  alt="thumbnail"
-                />
-                <p className="duration  white-text-color">{duration}</p>
-
+                <NavLink to={`/video/${_id}`}>
+                  <img
+                    className="card-img-vert pos-relative yt-card responsive-img cursor-pointer "
+                    src={thumbUrl}
+                    alt="thumbnail"
+                  />
+                  <p className="duration  white-text-color">{duration}</p>
+                </NavLink>
                 <div className="card-body pt-1">
                   <div className="d-flex flex-justify-space-between">
                     <div className="d-flex">
@@ -93,7 +93,11 @@ export default function Home() {
                       </div>
 
                       <div className="d-flex flex-column ">
-                        <p className="white-text-color ml-2">{title}</p>
+                        <NavLink to={`/video/${_id}`}>
+                          <p className="white-text-color ml-2 cursor-pointer">
+                            {title}
+                          </p>
+                        </NavLink>
                         <small className="card-subtitle mt-1">{creator}</small>
                         <p className="card-subtitle xs-font">
                           {views + " "}views
@@ -102,7 +106,7 @@ export default function Home() {
                     </div>
                     <div className="pos-relative">
                       <BsThreeDotsVertical
-                        className="white-text-color fs-2 "
+                        className="white-text-color fs-2 cursor-pointer "
                         onClick={() => handleShowPanel(_id)}
                       />
                       {showPanel && saveId == _id && (
@@ -127,7 +131,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </NavLink>
+              </div>
             );
           }
         )}
