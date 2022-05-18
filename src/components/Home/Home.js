@@ -5,7 +5,10 @@ import { getCategories } from "../../redux/reducers/video-listing/categorySlice"
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdVideoLibrary, MdThumbUp, MdThumbDown } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import { addVideoToLikes } from "../../redux/reducers/like/likeSlice";
+import {
+  addVideoToLikes,
+  removeVideosFromLikes,
+} from "../../redux/reducers/like/likeSlice";
 import { toast } from "react-toastify";
 export default function Home() {
   const videos = useSelector((state) => state.video.videos);
@@ -16,6 +19,7 @@ export default function Home() {
   const [isLike, setIslike] = useState(false);
   const dispatch = useDispatch();
   const likesDispatch = useDispatch();
+
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   useEffect(() => {
     dispatch(getVideos());
@@ -49,15 +53,15 @@ export default function Home() {
   };
 
   const addVideoToLike = async (video) => {
-    console.log("video to like");
     if (!isUserLoggedIn) return toast.error("You need to login first");
     await likesDispatch(addVideoToLikes(video)).unwrap();
     return toast.success("Added to like videos!");
   };
 
-  const likeDislikeHandler = (video) => {
-    if (!isUserLoggedIn) return toast.error("Please login to hit like!");
-    addVideoToLike(video);
+  const removefromLike = async (videoId) => {
+    if (!isUserLoggedIn) return toast.error("You need to login first");
+    await likesDispatch(removeVideosFromLikes(videoId)).unwrap();
+    return toast.success("Removed from like videos!");
   };
 
   return (
@@ -131,18 +135,34 @@ export default function Home() {
                         className="popup-threedot d-flex flex-column "
                         onClick={() => setShowPanel(!showPanel)}
                       >
-                        <div
-                          className="d-flex mb-1 cursor-pointer"
-                          onClick={() => {
-                            addVideoToLike(video);
-                            setIslike(true);
-                          }}
-                        >
-                          <MdThumbUp className="fs-2 white-text-color mr-2" />
-                          <p className="white-text-color font-weight-bold">
-                            Add to like
-                          </p>
-                        </div>
+                        {isLike ? (
+                          <div
+                            className="d-flex mb-1 cursor-pointer"
+                            onClick={() => {
+                              removefromLike(_id);
+                              setIslike(false);
+                            }}
+                          >
+                            <MdThumbUp className="fs-2 white-text-color mr-2" />
+                            <p className="white-text-color font-weight-bold">
+                              Remove from like
+                            </p>
+                          </div>
+                        ) : (
+                          <div
+                            className="d-flex mb-1 cursor-pointer"
+                            onClick={() => {
+                              addVideoToLike(video);
+                              setIslike(true);
+                            }}
+                          >
+                            <MdThumbUp className="fs-2 white-text-color mr-2" />
+                            <p className="white-text-color font-weight-bold">
+                              Add to like
+                            </p>
+                          </div>
+                        )}
+
                         <div className="d-flex mb-1">
                           <MdVideoLibrary className="fs-2 white-text-color mr-2" />
                           <p className="white-text-color font-weight-bold">

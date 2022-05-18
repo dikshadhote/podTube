@@ -39,8 +39,7 @@ export const addVideoToLikes = createAsyncThunk(
         return data;
       }
     } catch (error) {
-      console.log(error);
-      // return Promise.reject(error);
+      return Promise.reject(error);
     }
   }
 );
@@ -49,7 +48,14 @@ export const removeVideosFromLikes = createAsyncThunk(
   "likes/removeVideosFromLikes",
   async (videoId) => {
     try {
-      const { data, status } = await axios.delete("/api/user/likes" + videoId);
+      const { data, status } = await axios.delete(
+        "/api/user/likes/" + videoId,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      );
       if (status == 200) {
         return data;
       }
