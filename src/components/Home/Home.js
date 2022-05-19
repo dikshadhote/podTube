@@ -16,11 +16,13 @@ export default function Home() {
   const [showPanel, setShowPanel] = useState(false);
   const [saveId, showSaveid] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
-  const [isLike, setIslike] = useState(false);
+
   const dispatch = useDispatch();
   const likesDispatch = useDispatch();
 
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
+  const likedVideos = useSelector((state) => state.like.likes);
+  console.log(likedVideos);
   useEffect(() => {
     dispatch(getVideos());
     dispatch(getCategories());
@@ -135,15 +137,14 @@ export default function Home() {
                         className="popup-threedot d-flex flex-column "
                         onClick={() => setShowPanel(!showPanel)}
                       >
-                        {isLike ? (
+                        {likedVideos.some((video) => video._id === _id) ? (
                           <div
                             className="d-flex mb-1 cursor-pointer"
                             onClick={() => {
                               removefromLike(_id);
-                              setIslike(false);
                             }}
                           >
-                            <MdThumbUp className="fs-2 white-text-color mr-2" />
+                            <MdThumbDown className="fs-2 white-text-color mr-2" />
                             <p className="white-text-color font-weight-bold">
                               Remove from like
                             </p>
@@ -153,7 +154,6 @@ export default function Home() {
                             className="d-flex mb-1 cursor-pointer"
                             onClick={() => {
                               addVideoToLike(video);
-                              setIslike(true);
                             }}
                           >
                             <MdThumbUp className="fs-2 white-text-color mr-2" />

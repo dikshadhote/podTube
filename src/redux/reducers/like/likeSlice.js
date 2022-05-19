@@ -24,7 +24,6 @@ export const addVideoToLikes = createAsyncThunk(
   "likes/addVideoToLikes",
   async (video) => {
     try {
-      console.log(video);
       const { data, status } = await axios.post(
         "/api/user/likes",
         { video },
@@ -35,7 +34,6 @@ export const addVideoToLikes = createAsyncThunk(
         }
       );
       if (status == 201) {
-        console.log(data);
         return data;
       }
     } catch (error) {
@@ -70,7 +68,7 @@ export const likesSlice = createSlice({
   extraReducers: {
     [getLikedVideos.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.likes = action.payload.user.likes;
+      state.likes = action.payload.likes;
     },
     [getLikedVideos.rejected]: (state) => {
       state.status = "failed";
@@ -80,7 +78,7 @@ export const likesSlice = createSlice({
     },
     [addVideoToLikes.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.likes.concat(action.payload.user.likes);
+      state.likes = action.payload.likes;
     },
     [addVideoToLikes.rejected]: (state) => {
       state.status = "failed";
@@ -90,9 +88,6 @@ export const likesSlice = createSlice({
     },
     [removeVideosFromLikes.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.likes = state.likes.filter(
-        (video) => video._id !== action.payload._id
-      );
     },
     [removeVideosFromLikes.rejected]: (state) => {
       state.status = "failed";
