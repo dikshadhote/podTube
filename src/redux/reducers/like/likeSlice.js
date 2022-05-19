@@ -88,6 +88,7 @@ export const likesSlice = createSlice({
     },
     [removeVideosFromLikes.fulfilled]: (state, action) => {
       state.status = "succeeded";
+      state.likes = action.payload.likes;
     },
     [removeVideosFromLikes.rejected]: (state) => {
       state.status = "failed";
