@@ -22,7 +22,6 @@ export default function Home() {
 
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   const likedVideos = useSelector((state) => state.like.likes);
-  console.log(likedVideos);
   useEffect(() => {
     dispatch(getVideos());
     dispatch(getCategories());

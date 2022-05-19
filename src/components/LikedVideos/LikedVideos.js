@@ -17,7 +17,6 @@ export default function LikedVideos() {
   }, [likesDispatch]);
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   const likedVideos = useSelector((state) => state.like.likes);
-  console.log(likedVideos);
   const handleShowPanel = (inputId) => {
     showSaveid(inputId);
     const videoPresent = likedVideos.some((video) => video._id === inputId);
