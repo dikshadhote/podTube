@@ -124,7 +124,9 @@ export default function LikedVideos() {
         </div>
       ) : (
         <div className="d-flex justify-content center white-text-color">
-          Please hit a like !
+          <h4 className="mt-2 ml-2">
+            Please hit a like button ! to get videos here...
+          </h4>
         </div>
       )}
     </div>

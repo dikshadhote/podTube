@@ -18,7 +18,8 @@ export default function SingleVideo() {
   let filteredVideo = videos.find((video) => video._id === videoid);
   const likedVideos = useSelector((state) => state.like.likes);
   console.log(likedVideos);
-  let present = likedVideos.some((video) => video._id === filteredVideo._id);
+  let present = false;
+  present = likedVideos.some((video) => video._id === filteredVideo._id);
   console.log(present);
   let recommendationList = videos.filter(
     (video) =>
@@ -66,14 +67,26 @@ export default function SingleVideo() {
               {filteredVideo?.views} views
             </p>
             <div className="d-flex">
-              <BiLike
-                size={30}
-                className="white-text-color mr-2 cursor-pointer icon"
-                title="Add to like"
-                onClick={() => {
-                  addVideoToLike(filteredVideo);
-                }}
-              />
+              {present ? (
+                <BiDislike
+                  size={30}
+                  className="white-text-color mr-2 cursor-pointer icon"
+                  title="Remove from like"
+                  onClick={() => {
+                    removefromLike(filteredVideo?._id);
+                  }}
+                />
+              ) : (
+                <BiLike
+                  size={30}
+                  className="white-text-color mr-2 cursor-pointer icon"
+                  title="Add to like"
+                  onClick={() => {
+                    addVideoToLike(filteredVideo);
+                  }}
+                />
+              )}
+
               <RiPlayListAddFill
                 size={30}
                 className="white-text-color cursor-pointer icon"
