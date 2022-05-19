@@ -3,13 +3,23 @@ import { useParams, NavLink } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { getVideos } from "../../redux/reducers/video-listing/videosSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { BiLike } from "react-icons/bi";
+import { BiLike, BiDislike } from "react-icons/bi";
 import { RiPlayListAddFill } from "react-icons/ri";
+import { toast } from "react-toastify";
+import {
+  addVideoToLikes,
+  removeVideosFromLikes,
+} from "../../redux/reducers/like/likeSlice";
 export default function SingleVideo() {
   let { videoid } = useParams();
   const videos = useSelector((state) => state.video.videos);
-
+  const likesDispatch = useDispatch();
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   let filteredVideo = videos.find((video) => video._id === videoid);
+  const likedVideos = useSelector((state) => state.like.likes);
+  console.log(likedVideos);
+  let present = likedVideos.some((video) => video._id === filteredVideo._id);
+  console.log(present);
   let recommendationList = videos.filter(
     (video) =>
       video.categoryName === filteredVideo.categoryName &&
@@ -20,6 +30,18 @@ export default function SingleVideo() {
   useEffect(() => {
     dispatch(getVideos());
   }, [dispatch]);
+
+  const addVideoToLike = async (video) => {
+    if (!isUserLoggedIn) return toast.error("You need to login first");
+    await likesDispatch(addVideoToLikes(video)).unwrap();
+    return toast.success("Added to like videos!");
+  };
+
+  const removefromLike = async (videoId) => {
+    if (!isUserLoggedIn) return toast.error("You need to login first");
+    await likesDispatch(removeVideosFromLikes(videoId)).unwrap();
+    return toast.success("Removed from like videos!");
+  };
 
   return (
     <div className="grid-layout-singlev mt-2 ml-2">
@@ -44,8 +66,19 @@ export default function SingleVideo() {
               {filteredVideo?.views} views
             </p>
             <div className="d-flex">
-              <BiLike size={20} className="white-text-color" />
-              <RiPlayListAddFill size={20} className="white-text-color" />
+              <BiLike
+                size={30}
+                className="white-text-color mr-2 cursor-pointer icon"
+                title="Add to like"
+                onClick={() => {
+                  addVideoToLike(filteredVideo);
+                }}
+              />
+              <RiPlayListAddFill
+                size={30}
+                className="white-text-color cursor-pointer icon"
+                title="Add to playlist"
+              />
             </div>
           </div>
         </div>
