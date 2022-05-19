@@ -17,10 +17,10 @@ export default function SingleVideo() {
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   let filteredVideo = videos.find((video) => video._id === videoid);
   const likedVideos = useSelector((state) => state.like.likes);
-  console.log(likedVideos);
+
   let present = false;
   present = likedVideos.some((video) => video._id === filteredVideo._id);
-  console.log(present);
+
   let recommendationList = videos.filter(
     (video) =>
       video.categoryName === filteredVideo.categoryName &&
