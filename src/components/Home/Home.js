@@ -133,10 +133,7 @@ export default function Home() {
                       onClick={() => handleShowPanel(_id)}
                     />
                     {showPanel && saveId == _id && (
-                      <div
-                        className="popup-threedot d-flex flex-column "
-                        onClick={() => setShowPanel(!showPanel)}
-                      >
+                      <div className="popup-threedot d-flex flex-column">
                         {likedVideos.some((video) => video._id === _id) ? (
                           <div
                             className="d-flex mb-1 cursor-pointer"
