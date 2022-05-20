@@ -29,7 +29,6 @@ export default function Home() {
   const likedVideos = useSelector((state) => state.like.likes);
   const watchlaterVideos = useSelector((state) => state.watchlater.watchlater);
 
-  console.log("watchlater", watchlaterVideos);
   useEffect(() => {
     dispatch(getVideos());
     dispatch(getCategories());
