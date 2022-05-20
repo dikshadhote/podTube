@@ -185,7 +185,7 @@ export default function History() {
         </div>
       ) : (
         <div className="d-flex justify-content center white-text-color">
-          <h4 className="mt-2 ml-2">Please add videos to watch later...</h4>
+          <h4 className="mt-2 ml-2">No videos available in history...</h4>
         </div>
       )}
     </div>
