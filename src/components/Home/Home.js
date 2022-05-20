@@ -10,6 +10,7 @@ import {
   removeVideosFromLikes,
 } from "../../redux/reducers/like/likeSlice";
 import { toast } from "react-toastify";
+import { addVideoToWatchlater } from "../../redux/reducers/watch-later/watchlaterSlice";
 export default function Home() {
   const videos = useSelector((state) => state.video.videos);
   const categories = useSelector((state) => state.categories.categories);
@@ -19,9 +20,13 @@ export default function Home() {
 
   const dispatch = useDispatch();
   const likesDispatch = useDispatch();
+  const watchLaterDispatch = useDispatch();
 
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   const likedVideos = useSelector((state) => state.like.likes);
+  const watchlater = useSelector((state) => state.watchlater.watchlater);
+  console.log("likes", likedVideos);
+  console.log("watchlater", watchlater);
   useEffect(() => {
     dispatch(getVideos());
     dispatch(getCategories());
@@ -63,6 +68,12 @@ export default function Home() {
     if (!isUserLoggedIn) return toast.error("You need to login first");
     await likesDispatch(removeVideosFromLikes(videoId)).unwrap();
     return toast.success("Removed from like videos!");
+  };
+
+  const addVideoToWatchLater = async (video) => {
+    if (!isUserLoggedIn) return toast.error("You need to login first");
+    await watchLaterDispatch(addVideoToWatchlater(video)).unwrap();
+    return toast.success("Saved to watchlater videos!");
   };
 
   return (
@@ -159,7 +170,12 @@ export default function Home() {
                           </div>
                         )}
 
-                        <div className="d-flex mb-1">
+                        <div
+                          className="d-flex mb-1 cursor-pointer"
+                          onClick={() => {
+                            addVideoToWatchLater(video);
+                          }}
+                        >
                           <MdVideoLibrary className="fs-2 white-text-color mr-2" />
                           <p className="white-text-color font-weight-bold">
                             Save to watch later
