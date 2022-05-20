@@ -9,7 +9,11 @@ export const getWatchlaterVideos = createAsyncThunk(
   "watchlater/getWatchlaterVideos",
   async () => {
     try {
-      const { data, status } = await axios.get("/api/user/watchlater");
+      const { data, status } = await axios.get("/api/user/watchlater", {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      });
 
       if (status == 200) {
         return data;
@@ -68,7 +72,7 @@ export const watchlaterSlice = createSlice({
   extraReducers: {
     [getWatchlaterVideos.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.likes = action.payload.watchlater;
+      state.watchlater = action.payload.watchlater;
     },
     [getWatchlaterVideos.rejected]: (state) => {
       state.status = "failed";
@@ -78,7 +82,7 @@ export const watchlaterSlice = createSlice({
     },
     [addVideoToWatchlater.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.likes = action.payload.watchlater;
+      state.watchlater = action.payload.watchlater;
     },
     [addVideoToWatchlater.rejected]: (state) => {
       state.status = "failed";
@@ -88,7 +92,7 @@ export const watchlaterSlice = createSlice({
     },
     [removeVideoFromWatchlater.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.likes = action.payload.watchlater;
+      state.watchlater = action.payload.watchlater;
     },
     [removeVideoFromWatchlater.rejected]: (state) => {
       state.status = "failed";
