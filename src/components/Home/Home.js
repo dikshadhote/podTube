@@ -3,7 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { getVideos } from "../../redux/reducers/video-listing/videosSlice";
 import { getCategories } from "../../redux/reducers/video-listing/categorySlice";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { MdVideoLibrary, MdThumbUp } from "react-icons/md";
+import { MdVideoLibrary, MdThumbUp, MdThumbDown } from "react-icons/md";
+import { NavLink } from "react-router-dom";
+import {
+  addVideoToLikes,
+  removeVideosFromLikes,
+} from "../../redux/reducers/like/likeSlice";
+import { toast } from "react-toastify";
 export default function Home() {
   const videos = useSelector((state) => state.video.videos);
   const categories = useSelector((state) => state.categories.categories);
@@ -12,6 +18,10 @@ export default function Home() {
   const [filteredList, setFilteredList] = useState([]);
 
   const dispatch = useDispatch();
+  const likesDispatch = useDispatch();
+
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
+  const likedVideos = useSelector((state) => state.like.likes);
   useEffect(() => {
     dispatch(getVideos());
     dispatch(getCategories());
@@ -43,6 +53,18 @@ export default function Home() {
     }
   };
 
+  const addVideoToLike = async (video) => {
+    if (!isUserLoggedIn) return toast.error("You need to login first");
+    await likesDispatch(addVideoToLikes(video)).unwrap();
+    return toast.success("Added to like videos!");
+  };
+
+  const removefromLike = async (videoId) => {
+    if (!isUserLoggedIn) return toast.error("You need to login first");
+    await likesDispatch(removeVideosFromLikes(videoId)).unwrap();
+    return toast.success("Removed from like videos!");
+  };
+
   return (
     <div className="d-flex flex-column">
       <div className="mt-3 mb-1 ml-3 gray-border-chip-container pb-2 pt-2">
@@ -65,70 +87,92 @@ export default function Home() {
         })}
       </div>
       <div className="d-flex flex-wrap">
-        {filteredList?.map(
-          ({ title, thumbUrl, creator, views, duration, avatar, _id }) => {
-            return (
-              <div
-                className="card flex-column card-vert black-dark-bg border-none cursor-pointer"
-                key={_id}
-              >
+        {filteredList?.map((video) => {
+          const { title, thumbUrl, creator, views, duration, avatar, _id } =
+            video;
+          return (
+            <div
+              className="card flex-column card-vert black-dark-bg border-none"
+              key={_id}
+            >
+              <NavLink to={`/video/${_id}`}>
                 <img
-                  className="card-img-vert pos-relative yt-card responsive-img "
+                  className="card-img-vert pos-relative yt-card responsive-img cursor-pointer "
                   src={thumbUrl}
                   alt="thumbnail"
                 />
                 <p className="duration  white-text-color">{duration}</p>
-
-                <div className="card-body pt-1">
-                  <div className="d-flex flex-justify-space-between">
-                    <div className="d-flex">
-                      <div>
-                        <img
-                          src={avatar}
-                          className="avatar avatar-xs "
-                          alt="avatar"
-                        />
-                      </div>
-
-                      <div className="d-flex flex-column ">
-                        <p className="white-text-color ml-2">{title}</p>
-                        <small className="card-subtitle mt-1">{creator}</small>
-                        <p className="card-subtitle xs-font">
-                          {views + " "}views
-                        </p>
-                      </div>
-                    </div>
-                    <div className="pos-relative">
-                      <BsThreeDotsVertical
-                        className="white-text-color fs-2 "
-                        onClick={() => handleShowPanel(_id)}
+              </NavLink>
+              <div className="card-body pt-1">
+                <div className="d-flex flex-justify-space-between">
+                  <div className="d-flex">
+                    <div>
+                      <img
+                        src={avatar}
+                        className="avatar avatar-xs "
+                        alt="avatar"
                       />
-                      {showPanel && saveId == _id && (
-                        <div
-                          className="popup-threedot d-flex flex-column "
-                          onClick={() => setShowPanel(!showPanel)}
-                        >
-                          <div className="d-flex mb-1">
+                    </div>
+
+                    <div className="d-flex flex-column ">
+                      <NavLink to={`/video/${_id}`}>
+                        <p className="white-text-color ml-2 cursor-pointer">
+                          {title}
+                        </p>
+                      </NavLink>
+                      <small className="card-subtitle mt-1">{creator}</small>
+                      <p className="card-subtitle xs-font">
+                        {views + " "}views
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pos-relative">
+                    <BsThreeDotsVertical
+                      className="white-text-color fs-2 cursor-pointer "
+                      onClick={() => handleShowPanel(_id)}
+                    />
+                    {showPanel && saveId == _id && (
+                      <div className="popup-threedot d-flex flex-column">
+                        {likedVideos.some((video) => video._id === _id) ? (
+                          <div
+                            className="d-flex mb-1 cursor-pointer"
+                            onClick={() => {
+                              removefromLike(_id);
+                            }}
+                          >
+                            <MdThumbDown className="fs-2 white-text-color mr-2" />
+                            <p className="white-text-color font-weight-bold">
+                              Remove from like
+                            </p>
+                          </div>
+                        ) : (
+                          <div
+                            className="d-flex mb-1 cursor-pointer"
+                            onClick={() => {
+                              addVideoToLike(video);
+                            }}
+                          >
                             <MdThumbUp className="fs-2 white-text-color mr-2" />
                             <p className="white-text-color font-weight-bold">
-                              Like
+                              Add to like
                             </p>
                           </div>
-                          <div className="d-flex mb-1">
-                            <MdVideoLibrary className="fs-2 white-text-color mr-2" />
-                            <p className="white-text-color font-weight-bold">
-                              Save to watch later
-                            </p>
-                          </div>
+                        )}
+
+                        <div className="d-flex mb-1">
+                          <MdVideoLibrary className="fs-2 white-text-color mr-2" />
+                          <p className="white-text-color font-weight-bold">
+                            Save to watch later
+                          </p>
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
-            );
-          }
-        )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

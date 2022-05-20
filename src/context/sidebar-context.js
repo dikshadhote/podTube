@@ -6,7 +6,6 @@ const useSide = () => useContext(SideContext);
 const SideContextProvider = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(true);
   const toggleSidebar = () => {
-    console.log(showSidebar);
     setShowSidebar(!showSidebar);
   };
   return (

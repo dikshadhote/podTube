@@ -6,6 +6,8 @@
 @import "./components/Sidebar/Sidebar.css";
 @import "./components/Login/Login.css";
 @import "./components/Home/Home.css";
+@import "./components/SingleVideo/SingleVideo.css";
+@import "react-toastify/dist/ReactToastify.css";
 :root {
   --black-light-shade: #212121;
   --black-dark-background: #181818;
@@ -92,4 +94,11 @@ input:focus {
 
 .link-active-bg {
   background-color: var(--gray-link-active);
+}
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }

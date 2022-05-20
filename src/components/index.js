@@ -7,6 +7,8 @@ import WatchLater from "./WatchLater/WatchLater";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import SidebarMini from "./Sidebar/SidebarMini";
+import SingleVideo from "./SingleVideo/SingleVideo";
+
 export {
   Home,
   History,
@@ -17,4 +19,5 @@ export {
   Login,
   SignUp,
   SidebarMini,
+  SingleVideo,
 };

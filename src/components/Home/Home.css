@@ -28,7 +28,9 @@ p.white-text-color.duration {
   border-top: 0.5px solid var(--gray-link-active);
   border-bottom: 0.5px solid var(--gray-link-active);
 }
-
+.gray-bottom-border {
+  border-bottom: 0.5px solid var(--gray-link-active);
+}
 .popup-threedot {
   position: absolute;
   z-index: 7;
