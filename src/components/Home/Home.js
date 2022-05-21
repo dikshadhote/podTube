@@ -10,6 +10,10 @@ import {
   removeVideosFromLikes,
 } from "../../redux/reducers/like/likeSlice";
 import { toast } from "react-toastify";
+import {
+  addVideoToWatchlater,
+  removeVideoFromWatchlater,
+} from "../../redux/reducers/watch-later/watchlaterSlice";
 export default function Home() {
   const videos = useSelector((state) => state.video.videos);
   const categories = useSelector((state) => state.categories.categories);
@@ -19,9 +23,12 @@ export default function Home() {
 
   const dispatch = useDispatch();
   const likesDispatch = useDispatch();
+  const watchLaterDispatch = useDispatch();
 
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   const likedVideos = useSelector((state) => state.like.likes);
+  const watchlaterVideos = useSelector((state) => state.watchlater.watchlater);
+
   useEffect(() => {
     dispatch(getVideos());
     dispatch(getCategories());
@@ -63,6 +70,18 @@ export default function Home() {
     if (!isUserLoggedIn) return toast.error("You need to login first");
     await likesDispatch(removeVideosFromLikes(videoId)).unwrap();
     return toast.success("Removed from like videos!");
+  };
+
+  const addVideoToWatchLater = async (video) => {
+    if (!isUserLoggedIn) return toast.error("You need to login first");
+    await watchLaterDispatch(addVideoToWatchlater(video)).unwrap();
+    return toast.success("Saved to watchlater videos!");
+  };
+
+  const removeFromWatchLater = async (videoId) => {
+    if (!isUserLoggedIn) return toast.error("You need to login first");
+    await watchLaterDispatch(removeVideoFromWatchlater(videoId)).unwrap();
+    return toast.success("Removed from watchlater videos!");
   };
 
   return (
@@ -158,13 +177,31 @@ export default function Home() {
                             </p>
                           </div>
                         )}
-
-                        <div className="d-flex mb-1">
-                          <MdVideoLibrary className="fs-2 white-text-color mr-2" />
-                          <p className="white-text-color font-weight-bold">
-                            Save to watch later
-                          </p>
-                        </div>
+                        {watchlaterVideos.some((video) => video._id === _id) ? (
+                          <div
+                            className="d-flex mb-1 cursor-pointer"
+                            onClick={() => {
+                              removeFromWatchLater(_id);
+                            }}
+                          >
+                            <MdVideoLibrary className="fs-2 white-text-color mr-2" />
+                            <p className="white-text-color font-weight-bold">
+                              Remove from watch later
+                            </p>
+                          </div>
+                        ) : (
+                          <div
+                            className="d-flex mb-1 cursor-pointer"
+                            onClick={() => {
+                              addVideoToWatchLater(video);
+                            }}
+                          >
+                            <MdVideoLibrary className="fs-2 white-text-color mr-2" />
+                            <p className="white-text-color font-weight-bold">
+                              Save to watch later
+                            </p>
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>

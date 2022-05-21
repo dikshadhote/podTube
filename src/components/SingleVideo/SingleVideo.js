@@ -10,10 +10,12 @@ import {
   addVideoToLikes,
   removeVideosFromLikes,
 } from "../../redux/reducers/like/likeSlice";
+import { addVideoToHistory } from "../../redux/reducers/history/historySlice";
 export default function SingleVideo() {
   let { videoid } = useParams();
   const videos = useSelector((state) => state.video.videos);
   const likesDispatch = useDispatch();
+  const historyDispatch = useDispatch();
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   let filteredVideo = videos.find((video) => video._id === videoid);
   const likedVideos = useSelector((state) => state.like.likes);
@@ -43,7 +45,13 @@ export default function SingleVideo() {
     await likesDispatch(removeVideosFromLikes(videoId)).unwrap();
     return toast.success("Removed from like videos!");
   };
+  const addVideoToHistoryData = (video) => {
+    historyDispatch(addVideoToHistory(video));
+  };
 
+  useEffect(() => {
+    addVideoToHistoryData(filteredVideo);
+  }, [filteredVideo, isUserLoggedIn]);
   return (
     <div className="grid-layout-singlev mt-2 ml-2">
       <div>
