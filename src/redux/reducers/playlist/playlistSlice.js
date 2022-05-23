@@ -67,6 +67,49 @@ export const deletePlaylist = createAsyncThunk(
   }
 );
 
+export const addVideoToPlaylist = createAsyncThunk(
+  "playlist/addVideoToPlaylist",
+  async (video, playlistId) => {
+    try {
+      const { data, status } = await axios.post(
+        "/api/user/playlists" + playlistId,
+        { video },
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (status == 201) {
+        return data;
+      }
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+);
+
+export const removeVideoFromPlaylist = createAsyncThunk(
+  "playlist/removeVideoFromPlaylist",
+  async (videoId, playlistId) => {
+    try {
+      const { data, status } = await axios.delete(
+        `/api/user/playlists/ + ${playlistId}/${videoId}`,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (status == 200) {
+        return data;
+      }
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+);
+
 export const playlistSlice = createSlice({
   name: "playlist",
   initialState,
@@ -99,6 +142,26 @@ export const playlistSlice = createSlice({
       state.status = "failed";
     },
     [deletePlaylist.pending]: (state) => {
+      state.status = "loading";
+    },
+    [addVideoToPlaylist.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.playlists = action.payload.playlists;
+    },
+    [addVideoToPlaylist.rejected]: (state) => {
+      state.status = "failed";
+    },
+    [addVideoToPlaylist.pending]: (state) => {
+      state.status = "loading";
+    },
+    [removeVideoFromPlaylist.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.playlists = action.payload.playlists;
+    },
+    [removeVideoFromPlaylist.rejected]: (state) => {
+      state.status = "failed";
+    },
+    [removeVideoFromPlaylist.pending]: (state) => {
       state.status = "loading";
     },
   },
