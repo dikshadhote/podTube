@@ -3,7 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { getVideos } from "../../redux/reducers/video-listing/videosSlice";
 import { getCategories } from "../../redux/reducers/video-listing/categorySlice";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { MdVideoLibrary, MdThumbUp, MdThumbDown } from "react-icons/md";
+import {
+  MdVideoLibrary,
+  MdThumbUp,
+  MdThumbDown,
+  MdPlaylistAdd,
+} from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import {
   addVideoToLikes,
@@ -202,6 +207,12 @@ export default function Home() {
                             </p>
                           </div>
                         )}
+                        <div className="d-flex mb-1 cursor-pointe">
+                          <MdPlaylistAdd className="fs-2 white-text-color mr-2" />
+                          <p className="white-text-color font-weight-bold">
+                            Add to playlist
+                          </p>
+                        </div>
                       </div>
                     )}
                   </div>

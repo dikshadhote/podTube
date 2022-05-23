@@ -8,6 +8,7 @@ import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import SidebarMini from "./Sidebar/SidebarMini";
 import SingleVideo from "./SingleVideo/SingleVideo";
+import Playlist from "./playlist/Playlist";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   SignUp,
   SidebarMini,
   SingleVideo,
+  Playlist,
 };
