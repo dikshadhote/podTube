@@ -5,7 +5,7 @@ import categoryReducer from "../reducers/video-listing/categorySlice";
 import likeReducer from "../reducers/like/likeSlice";
 import watchlaterReducer from "../reducers/watch-later/watchlaterSlice";
 import historyReducer from "../reducers/history/historySlice";
-
+import playlistReducer from "../reducers/playlist/playlistSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -14,5 +14,6 @@ export const store = configureStore({
     like: likeReducer,
     watchlater: watchlaterReducer,
     history: historyReducer,
+    playlists: playlistReducer,
   },
 });

@@ -19,12 +19,15 @@ import {
   addVideoToWatchlater,
   removeVideoFromWatchlater,
 } from "../../redux/reducers/watch-later/watchlaterSlice";
+import PlaylistPortal from "../../PlaylistPortal";
+import Modal from "../Modal/Modal";
 export default function Home() {
   const videos = useSelector((state) => state.video.videos);
   const categories = useSelector((state) => state.categories.categories);
   const [showPanel, setShowPanel] = useState(false);
   const [saveId, showSaveid] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();
   const likesDispatch = useDispatch();
@@ -91,6 +94,7 @@ export default function Home() {
 
   return (
     <div className="d-flex flex-column">
+      {showModal ? <Modal setShowModal={setShowModal} /> : null}
       <div className="mt-3 mb-1 ml-3 gray-border-chip-container pb-2 pt-2">
         <span
           className="card-category-txt  white-text-color cursor-pointer"
@@ -207,7 +211,10 @@ export default function Home() {
                             </p>
                           </div>
                         )}
-                        <div className="d-flex mb-1 cursor-pointe">
+                        <div
+                          className="d-flex mb-1 cursor-pointer pos-relative"
+                          onClick={() => setShowModal(true)}
+                        >
                           <MdPlaylistAdd className="fs-2 white-text-color mr-2" />
                           <p className="white-text-color font-weight-bold">
                             Add to playlist

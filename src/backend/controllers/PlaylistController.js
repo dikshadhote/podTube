@@ -59,7 +59,7 @@ export const addNewPlaylistHandler = function (schema, request) {
 };
 
 /**
- * This handler handles removing videos from user's playlists.
+ * This handler handles removing  user's playlist.
  * send DELETE Request at /api/user/playlists/:playlistId
  * */
 
