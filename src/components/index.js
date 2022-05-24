@@ -9,6 +9,7 @@ import SignUp from "./SignUp/SignUp";
 import SidebarMini from "./Sidebar/SidebarMini";
 import SingleVideo from "./SingleVideo/SingleVideo";
 import Playlist from "./playlist/Playlist";
+import Modal from "./Modal/Modal";
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   SidebarMini,
   SingleVideo,
   Playlist,
+  Modal,
 };
