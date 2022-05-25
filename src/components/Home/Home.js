@@ -28,7 +28,7 @@ export default function Home() {
   const [saveId, showSaveid] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
   const [showModal, setShowModal] = useState(false);
-
+  const [currentVideo, setCurrentVideo] = useState({});
   const dispatch = useDispatch();
   const likesDispatch = useDispatch();
   const watchLaterDispatch = useDispatch();
@@ -94,7 +94,9 @@ export default function Home() {
 
   return (
     <div className="d-flex flex-column">
-      {showModal ? <Modal setShowModal={setShowModal} /> : null}
+      {showModal ? (
+        <PlaylistPortal setShowModal={setShowModal} video={currentVideo} />
+      ) : null}
       <div className="mt-3 mb-1 ml-3 gray-border-chip-container pb-2 pt-2">
         <span
           className="card-category-txt  white-text-color cursor-pointer"
@@ -157,7 +159,10 @@ export default function Home() {
                   <div className="pos-relative">
                     <BsThreeDotsVertical
                       className="white-text-color fs-2 cursor-pointer "
-                      onClick={() => handleShowPanel(_id)}
+                      onClick={() => {
+                        handleShowPanel(_id);
+                        setCurrentVideo(video);
+                      }}
                     />
                     {showPanel && saveId == _id && (
                       <div className="popup-threedot d-flex flex-column">
