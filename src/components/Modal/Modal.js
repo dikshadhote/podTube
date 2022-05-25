@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import PlaylistInputForm from "./PlaylistInputForm";
-import { deletePlaylist } from "../../redux/reducers/playlist/playlistSlice";
+import {
+  deletePlaylist,
+  addVideoToPlaylist,
+} from "../../redux/reducers/playlist/playlistSlice";
 import { toast } from "react-toastify";
-export default function Modal({ setShowModal }) {
+export default function Modal({ setShowModal, video }) {
+  console.log(setShowModal);
   const playlistsData = useSelector((state) => state.playlists.playlists);
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
+  const [currentPlaylist, setCurrentPlaylist] = useState({});
   console.log(playlistsData);
   const playlistDispatch = useDispatch();
   const deletePlaylistName = async (playlistId) => {
@@ -14,6 +19,14 @@ export default function Modal({ setShowModal }) {
     await playlistDispatch(deletePlaylist(playlistId)).unwrap();
     return toast.success("Removed playlist successfully!");
   };
+
+  const addVideoToPlayList = async (video, playlistId) => {
+    if (!isUserLoggedIn)
+      return toast.error("Please login to add video to playlist");
+    await playlistDispatch(addVideoToPlaylist({ video, playlistId })).unwrap();
+    return toast.success("Added video to playlist!");
+  };
+
   return (
     <div className="white-text-color modal">
       <div className="white-text-color black-light-shade-bg p-3 d-flex flex-column flex-justify-center ">
@@ -30,7 +43,15 @@ export default function Modal({ setShowModal }) {
               className="d-flex flex-justify-space-between align-items-center"
             >
               <div className="d-flex align-items-center  mt-1">
-                <input type="checkbox" id={playlist._id} className="mr-1" />
+                <input
+                  type="checkbox"
+                  id={playlist._id}
+                  className="mr-1"
+                  onChange={() => {
+                    addVideoToPlayList(video, playlist._id);
+                    setCurrentPlaylist(playlist);
+                  }}
+                />
                 <label htmlFor={playlist._id}> {playlist.title}</label>
               </div>
 

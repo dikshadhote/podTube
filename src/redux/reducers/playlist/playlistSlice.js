@@ -69,10 +69,10 @@ export const deletePlaylist = createAsyncThunk(
 
 export const addVideoToPlaylist = createAsyncThunk(
   "playlist/addVideoToPlaylist",
-  async (video, playlistId) => {
+  async ({ video, playlistId }) => {
     try {
       const { data, status } = await axios.post(
-        "/api/user/playlists" + playlistId,
+        "/api/user/playlists/" + playlistId,
         { video },
         {
           headers: {
@@ -81,9 +81,11 @@ export const addVideoToPlaylist = createAsyncThunk(
         }
       );
       if (status == 201) {
+        console.log(data);
         return data;
       }
     } catch (error) {
+      console.log(error);
       return Promise.reject(error);
     }
   }
@@ -146,7 +148,12 @@ export const playlistSlice = createSlice({
     },
     [addVideoToPlaylist.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.playlists = action.payload.playlists;
+      state.playlists = state.playlists.map((playlist) =>
+        playlist._id === action.payload.playlist._id
+          ? { ...playlist, videos: action.payload.playlist }
+          : { ...playlist }
+      );
+      console.log(state.playlists);
     },
     [addVideoToPlaylist.rejected]: (state) => {
       state.status = "failed";
