@@ -81,11 +81,9 @@ export const addVideoToPlaylist = createAsyncThunk(
         }
       );
       if (status == 201) {
-        console.log(data);
         return data;
       }
     } catch (error) {
-      console.log(error);
       return Promise.reject(error);
     }
   }
@@ -93,10 +91,10 @@ export const addVideoToPlaylist = createAsyncThunk(
 
 export const removeVideoFromPlaylist = createAsyncThunk(
   "playlist/removeVideoFromPlaylist",
-  async (videoId, playlistId) => {
+  async ({ videoId, playlistId }) => {
     try {
       const { data, status } = await axios.delete(
-        `/api/user/playlists/ + ${playlistId}/${videoId}`,
+        `/api/user/playlists/${playlistId}/${videoId}`,
         {
           headers: {
             authorization: localStorage.getItem("token"),
@@ -104,9 +102,11 @@ export const removeVideoFromPlaylist = createAsyncThunk(
         }
       );
       if (status == 200) {
+        console.log(data);
         return data;
       }
     } catch (error) {
+      console.log(error);
       return Promise.reject(error);
     }
   }
@@ -150,7 +150,7 @@ export const playlistSlice = createSlice({
       state.status = "succeeded";
       state.playlists = state.playlists.map((playlist) =>
         playlist._id === action.payload.playlist._id
-          ? { ...playlist, videos: action.payload.playlist }
+          ? { ...playlist, videos: action.payload.playlist.videos }
           : { ...playlist }
       );
       console.log(state.playlists);
@@ -163,7 +163,12 @@ export const playlistSlice = createSlice({
     },
     [removeVideoFromPlaylist.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.playlists = action.payload.playlists;
+      state.playlists = state.playlists.map((playlist) =>
+        playlist._id === action.payload.playlist._id
+          ? { ...playlist, videos: action.payload.playlist.videos }
+          : { ...playlist }
+      );
+      console.log(state.playlists);
     },
     [removeVideoFromPlaylist.rejected]: (state) => {
       state.status = "failed";

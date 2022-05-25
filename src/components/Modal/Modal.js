@@ -5,14 +5,13 @@ import PlaylistInputForm from "./PlaylistInputForm";
 import {
   deletePlaylist,
   addVideoToPlaylist,
+  removeVideoFromPlaylist,
 } from "../../redux/reducers/playlist/playlistSlice";
 import { toast } from "react-toastify";
 export default function Modal({ setShowModal, video }) {
-  console.log(setShowModal);
   const playlistsData = useSelector((state) => state.playlists.playlists);
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
-  const [currentPlaylist, setCurrentPlaylist] = useState({});
-  console.log(playlistsData);
+
   const playlistDispatch = useDispatch();
   const deletePlaylistName = async (playlistId) => {
     if (!isUserLoggedIn) return toast.error("Login to delete playlist");
@@ -26,7 +25,26 @@ export default function Modal({ setShowModal, video }) {
     await playlistDispatch(addVideoToPlaylist({ video, playlistId })).unwrap();
     return toast.success("Added video to playlist!");
   };
+  const removeVideoFromPlayList = async (videoId, playlistId) => {
+    if (!isUserLoggedIn)
+      return toast.error("Please login to remove video from playlist");
+    await playlistDispatch(
+      removeVideoFromPlaylist({ videoId, playlistId })
+    ).unwrap();
+    return toast.success("Removed video from playlist!");
+  };
+  const isInPlaylist = (PlaylistId, videoId) =>
+    playlistsData.some((playlist) =>
+      playlist._id === PlaylistId
+        ? playlist.videos.some((video) => video._id === videoId)
+        : false
+    );
 
+  const updatePlaylist = (e, video, playlistId) => {
+    e.target.checked
+      ? addVideoToPlayList(video, playlistId)
+      : removeVideoFromPlayList(video._id, playlistId);
+  };
   return (
     <div className="white-text-color modal">
       <div className="white-text-color black-light-shade-bg p-3 d-flex flex-column flex-justify-center ">
@@ -47,10 +65,10 @@ export default function Modal({ setShowModal, video }) {
                   type="checkbox"
                   id={playlist._id}
                   className="mr-1"
-                  onChange={() => {
-                    addVideoToPlayList(video, playlist._id);
-                    setCurrentPlaylist(playlist);
+                  onChange={(e) => {
+                    updatePlaylist(e, video, playlist._id);
                   }}
+                  checked={isInPlaylist(playlist._id, video._id)}
                 />
                 <label htmlFor={playlist._id}> {playlist.title}</label>
               </div>
