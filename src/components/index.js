@@ -11,6 +11,7 @@ import SingleVideo from "./SingleVideo/SingleVideo";
 import Playlist from "./playlist/Playlist";
 import Modal from "./Modal/Modal";
 import VideoCard from "./VideoCard/VideoCard";
+import OptionPanel from "./OptionPanel/OptionPanel";
 export {
   Home,
   History,
@@ -25,4 +26,5 @@ export {
   Playlist,
   Modal,
   VideoCard,
+  OptionPanel,
 };
