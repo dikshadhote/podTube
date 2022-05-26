@@ -10,7 +10,7 @@ import SidebarMini from "./Sidebar/SidebarMini";
 import SingleVideo from "./SingleVideo/SingleVideo";
 import Playlist from "./playlist/Playlist";
 import Modal from "./Modal/Modal";
-
+import VideoCard from "./VideoCard/VideoCard";
 export {
   Home,
   History,
@@ -24,4 +24,5 @@ export {
   SingleVideo,
   Playlist,
   Modal,
+  VideoCard,
 };
