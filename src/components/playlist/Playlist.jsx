@@ -26,7 +26,14 @@ export default function Playlist() {
                 </div>
                 <div className="d-flex flex-wrap">
                   {playlist.videos.map((video) => {
-                    return <VideoCard video={video} key={video._id} />;
+                    return (
+                      <VideoCard
+                        video={video}
+                        key={video._id}
+                        isPlaylist={true}
+                        playlistId={playlist._id}
+                      />
+                    );
                   })}
                 </div>
               </div>
