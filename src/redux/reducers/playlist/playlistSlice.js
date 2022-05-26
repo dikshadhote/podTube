@@ -102,11 +102,9 @@ export const removeVideoFromPlaylist = createAsyncThunk(
         }
       );
       if (status == 200) {
-        console.log(data);
         return data;
       }
     } catch (error) {
-      console.log(error);
       return Promise.reject(error);
     }
   }
@@ -153,7 +151,6 @@ export const playlistSlice = createSlice({
           ? { ...playlist, videos: action.payload.playlist.videos }
           : { ...playlist }
       );
-      console.log(state.playlists);
     },
     [addVideoToPlaylist.rejected]: (state) => {
       state.status = "failed";
@@ -168,7 +165,6 @@ export const playlistSlice = createSlice({
           ? { ...playlist, videos: action.payload.playlist.videos }
           : { ...playlist }
       );
-      console.log(state.playlists);
     },
     [removeVideoFromPlaylist.rejected]: (state) => {
       state.status = "failed";

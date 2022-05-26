@@ -11,7 +11,6 @@ export default function Playlist() {
   }, [playlistDispatch]);
 
   const playlistData = useSelector((state) => state.playlists.playlists);
-  console.log(playlistData);
   return (
     <div>
       {playlistData.length > 0 ? (
