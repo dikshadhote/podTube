@@ -17,7 +17,7 @@ export default function Playlist() {
         <div>
           {playlistData.map((playlist) => {
             return (
-              <div>
+              <div key={playlist._id}>
                 <div className="d-flex justify-content center white-text-color">
                   <h4 className="mt-2 ml-2 white-text-color">
                     {playlist.title}
