@@ -12,6 +12,7 @@ import {
   Sidebar,
   SidebarMini,
   SingleVideo,
+  Playlist,
 } from "../components";
 import PrivateRoute from "./PrivateRoute";
 export default function Router() {
@@ -45,6 +46,12 @@ export default function Router() {
               path="/watchlater"
               element={
                 <PrivateRoute navigateToPath={<WatchLater />}></PrivateRoute>
+              }
+            />
+            <Route
+              path="/playlist"
+              element={
+                <PrivateRoute navigateToPath={<Playlist />}></PrivateRoute>
               }
             />
           </Routes>

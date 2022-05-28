@@ -8,7 +8,10 @@ import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import SidebarMini from "./Sidebar/SidebarMini";
 import SingleVideo from "./SingleVideo/SingleVideo";
-
+import Playlist from "./playlist/Playlist";
+import Modal from "./Modal/Modal";
+import VideoCard from "./VideoCard/VideoCard";
+import OptionPanel from "./OptionPanel/OptionPanel";
 export {
   Home,
   History,
@@ -20,4 +23,8 @@ export {
   SignUp,
   SidebarMini,
   SingleVideo,
+  Playlist,
+  Modal,
+  VideoCard,
+  OptionPanel,
 };

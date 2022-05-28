@@ -1,6 +1,12 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { MdHome, MdVideoLibrary, MdThumbUp, MdHistory } from "react-icons/md";
+import {
+  MdHome,
+  MdVideoLibrary,
+  MdThumbUp,
+  MdHistory,
+  MdPlaylistAdd,
+} from "react-icons/md";
 export default function Sidebar() {
   const location = useLocation();
   return (
@@ -48,6 +54,17 @@ export default function Sidebar() {
       >
         <MdVideoLibrary className="fs-2 white-text-color mr-2" />
         <p className="white-text-color font-weight-bold">Watch Later</p>
+      </NavLink>
+      <NavLink
+        className={
+          location.pathname == "/playlist"
+            ? "d-flex p-2 cursor-pointer align-items-center link-active"
+            : "d-flex p-2 cursor-pointer align-items-center sidebar-item"
+        }
+        to="/playlist"
+      >
+        <MdPlaylistAdd className="fs-3 white-text-color mr-2" />
+        <p className="white-text-color font-weight-bold">Playlist</p>
       </NavLink>
     </div>
   );

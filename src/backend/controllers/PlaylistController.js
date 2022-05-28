@@ -10,7 +10,7 @@ import { v4 as uuid } from "uuid";
 
 /**
  * This handler handles getting all user's playlists.
- * send GET Request at /api/user/playlist
+ * send GET Request at /api/user/playlists
  * */
 export const getAllPlaylistsHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
@@ -59,7 +59,7 @@ export const addNewPlaylistHandler = function (schema, request) {
 };
 
 /**
- * This handler handles removing videos from user's playlists.
+ * This handler handles removing  user's playlist.
  * send DELETE Request at /api/user/playlists/:playlistId
  * */
 

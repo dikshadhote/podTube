@@ -3,7 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { getVideos } from "../../redux/reducers/video-listing/videosSlice";
 import { getCategories } from "../../redux/reducers/video-listing/categorySlice";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { MdVideoLibrary, MdThumbUp, MdThumbDown } from "react-icons/md";
+import {
+  MdVideoLibrary,
+  MdThumbUp,
+  MdThumbDown,
+  MdPlaylistAdd,
+} from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import {
   addVideoToLikes,
@@ -14,13 +19,16 @@ import {
   addVideoToWatchlater,
   removeVideoFromWatchlater,
 } from "../../redux/reducers/watch-later/watchlaterSlice";
+import PlaylistPortal from "../../PlaylistPortal";
+import Modal from "../Modal/Modal";
 export default function Home() {
   const videos = useSelector((state) => state.video.videos);
   const categories = useSelector((state) => state.categories.categories);
   const [showPanel, setShowPanel] = useState(false);
   const [saveId, showSaveid] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
-
+  const [showModal, setShowModal] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState({});
   const dispatch = useDispatch();
   const likesDispatch = useDispatch();
   const watchLaterDispatch = useDispatch();
@@ -86,6 +94,9 @@ export default function Home() {
 
   return (
     <div className="d-flex flex-column">
+      {showModal ? (
+        <PlaylistPortal setShowModal={setShowModal} video={currentVideo} />
+      ) : null}
       <div className="mt-3 mb-1 ml-3 gray-border-chip-container pb-2 pt-2">
         <span
           className="card-category-txt  white-text-color cursor-pointer"
@@ -148,7 +159,10 @@ export default function Home() {
                   <div className="pos-relative">
                     <BsThreeDotsVertical
                       className="white-text-color fs-2 cursor-pointer "
-                      onClick={() => handleShowPanel(_id)}
+                      onClick={() => {
+                        handleShowPanel(_id);
+                        setCurrentVideo(video);
+                      }}
                     />
                     {showPanel && saveId == _id && (
                       <div className="popup-threedot d-flex flex-column">
@@ -202,6 +216,15 @@ export default function Home() {
                             </p>
                           </div>
                         )}
+                        <div
+                          className="d-flex mb-1 cursor-pointer pos-relative"
+                          onClick={() => setShowModal(true)}
+                        >
+                          <MdPlaylistAdd className="fs-2 white-text-color mr-2" />
+                          <p className="white-text-color font-weight-bold">
+                            Add to playlist
+                          </p>
+                        </div>
                       </div>
                     )}
                   </div>

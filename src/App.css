@@ -9,7 +9,8 @@
 @import "./components/SingleVideo/SingleVideo.css";
 @import "react-toastify/dist/ReactToastify.css";
 @import "./components/History//History.css";
-:root  {
+@import "./components/Modal/Modal.css";
+:root {
   --black-light-shade: #212121;
   --black-dark-background: #181818;
   --red-yt-color: #ff0000;
