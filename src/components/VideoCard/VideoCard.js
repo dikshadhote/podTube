@@ -4,14 +4,21 @@ import OptionPanel from "../OptionPanel/OptionPanel";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import { removeVideoFromPlaylist } from "../../redux/reducers/playlist/playlistSlice";
+import { removeVideoFromHistory } from "../../redux/reducers/history/historySlice";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-export default function VideoCard({ video, isPlaylist, playlistId }) {
+export default function VideoCard({
+  video,
+  isPlaylist,
+  playlistId,
+  isHistory,
+}) {
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   const { title, thumbUrl, creator, views, duration, avatar, _id } = video;
   const [showPanel, setShowPanel] = useState(false);
   const [saveId, showSaveid] = useState(false);
   const playlistDispatch = useDispatch();
+  const historyDispatch = useDispatch();
   const handleShowPanel = (inputId) => {
     showSaveid(inputId);
     setShowPanel(true);
@@ -25,25 +32,40 @@ export default function VideoCard({ video, isPlaylist, playlistId }) {
     ).unwrap();
     return toast.success("Removed video from playlist!");
   };
-
+  const removeFromHistory = async (videoId) => {
+    if (!isUserLoggedIn) return toast.error("You need to login first");
+    await historyDispatch(removeVideoFromHistory(videoId)).unwrap();
+    return toast.success("Removed from history videos!");
+  };
   return (
-    <div className="card flex-column card-vert black-dark-bg border-none">
+    <div className="card flex-column card-vert black-dark-bg border-none  pos-relative ">
+      {isPlaylist ? (
+        <MdClose
+          size={20}
+          className="white-text-color cross-history cursor-pointer"
+          title="Remove from playlist"
+          onClick={() => {
+            removeVideoFromPlayList(_id, playlistId);
+          }}
+        />
+      ) : null}
+      {isHistory ? (
+        <MdClose
+          size={20}
+          className="white-text-color cross-history cursor-pointer"
+          title="Remove from History"
+          onClick={() => {
+            removeFromHistory(_id);
+          }}
+        />
+      ) : null}
       <NavLink to={`/video/${_id}`}>
         <img
-          className="card-img-vert pos-relative yt-card responsive-img cursor-pointer "
+          className="card-img-vert yt-card responsive-img cursor-pointer "
           src={thumbUrl}
           alt="thumbnail"
         />
-        {isPlaylist ? (
-          <MdClose
-            size={20}
-            className="white-text-color cross-history cursor-pointer"
-            title="Remove from playlist"
-            onClick={() => {
-              removeVideoFromPlayList(_id, playlistId);
-            }}
-          />
-        ) : null}
+
         <p className="duration  white-text-color">{duration}</p>
       </NavLink>
       <div className="card-body pt-1">

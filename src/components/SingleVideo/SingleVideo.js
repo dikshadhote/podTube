@@ -51,7 +51,7 @@ export default function SingleVideo() {
 
   useEffect(() => {
     addVideoToHistoryData(filteredVideo);
-  }, [filteredVideo, isUserLoggedIn]);
+  }, [filteredVideo, isUserLoggedIn, videoid]);
   return (
     <div className="grid-layout-singlev mt-2 ml-2">
       <div>
