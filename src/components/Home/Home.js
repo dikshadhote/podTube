@@ -20,18 +20,26 @@ import {
   removeVideoFromWatchlater,
 } from "../../redux/reducers/watch-later/watchlaterSlice";
 import PlaylistPortal from "../../PlaylistPortal";
-import Modal from "../Modal/Modal";
+import { useSearch } from "../../context/search-context";
 export default function Home() {
   const videos = useSelector((state) => state.video.videos);
   const categories = useSelector((state) => state.categories.categories);
   const [showPanel, setShowPanel] = useState(false);
   const [saveId, showSaveid] = useState(false);
-  const [filteredList, setFilteredList] = useState([]);
+
   const [showModal, setShowModal] = useState(false);
   const [currentVideo, setCurrentVideo] = useState({});
   const dispatch = useDispatch();
   const likesDispatch = useDispatch();
   const watchLaterDispatch = useDispatch();
+  const {
+    searchValue,
+    sortByTag,
+    filteredList,
+    setFilteredList,
+    filterAfterSearch,
+    setfilterAfterSearch,
+  } = useSearch();
 
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   const likedVideos = useSelector((state) => state.like.likes);
@@ -44,27 +52,15 @@ export default function Home() {
 
   useEffect(() => {
     setFilteredList(videos);
+    setfilterAfterSearch(videos);
   }, [videos]);
+
   const handleShowPanel = (inputId) => {
     showSaveid(inputId);
     const videoPresent = videos.some((video) => video._id === inputId);
 
     if (videoPresent) {
       setShowPanel(true);
-    }
-  };
-  const sortByTag = (videos, categoryName) => {
-    let filterArr = videos.filter((video) => {
-      const category = video.categoryName.toLowerCase();
-      const selectedCategory = categoryName.toLowerCase();
-      if (category === selectedCategory) {
-        return video;
-      }
-    });
-
-    setFilteredList(filterArr);
-    if (categoryName === "all") {
-      setFilteredList(videos);
     }
   };
 
@@ -117,7 +113,7 @@ export default function Home() {
         })}
       </div>
       <div className="d-flex flex-wrap">
-        {filteredList?.map((video) => {
+        {filterAfterSearch?.map((video) => {
           const { title, thumbUrl, creator, views, duration, avatar, _id } =
             video;
           return (
