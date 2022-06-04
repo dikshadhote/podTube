@@ -33,6 +33,9 @@ UI consists of :
 - You can see list of recommeded videos of same category as the video you clicked on
 ![image](https://user-images.githubusercontent.com/39937404/171991587-5ae57f23-a4e9-4cf6-b538-9de0245e07a4.png)
 
+# Search
+- You can search by author name or video title
+
 # History Page
 - If you visit single video page , the video will be displayed in history
 
