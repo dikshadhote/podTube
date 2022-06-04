@@ -27,7 +27,6 @@ export default function Navbar() {
       setSearchValue(input);
     }, 2000);
   };
-  console.log(searchValue);
   return (
     <div>
       <div className="nav-bar black-light-shade-bg">
