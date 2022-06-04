@@ -6,9 +6,12 @@ import { useSide } from "../../context/sidebar-context";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/reducers/auth/authSlice";
+import { useSearch } from "../../context/search-context";
 export default function Navbar() {
   const { toggleSidebar } = useSide();
   const logoutDispatch = useDispatch();
+  const { setSearchValue, searchValue, filteredList, searchByVideoTitle } =
+    useSearch();
 
   const navigateTo = useNavigate();
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
@@ -18,6 +21,13 @@ export default function Navbar() {
     //redirect to login
     navigateTo("/login", { replace: true });
   };
+
+  const searchTextHandler = (input) => {
+    setTimeout(() => {
+      setSearchValue(input);
+    }, 2000);
+  };
+
   return (
     <div>
       <div className="nav-bar black-light-shade-bg">
@@ -33,9 +43,17 @@ export default function Navbar() {
         </div>
         <div>
           <div className="border-none search-box d-flex border-radius">
-            <input type="text" placeholder="Search" id="search" />
+            <input
+              type="text"
+              placeholder="Search here.."
+              id="search"
+              onChange={(e) => searchTextHandler(e.target.value)}
+            />
             <button className="d-flex align-items-center border-none cursor-pointer">
-              <FiSearch size={20} />
+              <FiSearch
+                size={20}
+                onClick={() => searchByVideoTitle(searchValue, filteredList)}
+              />
             </button>
           </div>
         </div>
