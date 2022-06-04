@@ -24,13 +24,18 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const searchByVideoTitle = (searchValue, filteredList) => {
-    let filteredBySearch = filteredList.filter(
-      (video) =>
-        video.title.toLowerCase().includes(searchValue) ||
-        video.creator.toLowerCase().includes(searchValue)
-    );
-    setfilterAfterSearch(filteredBySearch);
-    if (searchValue === "") setfilterAfterSearch(filteredList);
+    let filteredBySearch = filteredList.filter((video) => {
+      return (
+        video.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+        video.creator.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    });
+
+    if (searchValue === "") {
+      setfilterAfterSearch(filteredList);
+    } else {
+      setfilterAfterSearch(filteredBySearch);
+    }
   };
 
   return (

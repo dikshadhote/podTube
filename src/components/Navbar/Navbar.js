@@ -27,7 +27,7 @@ export default function Navbar() {
       setSearchValue(input);
     }, 2000);
   };
-
+  console.log(searchValue);
   return (
     <div>
       <div className="nav-bar black-light-shade-bg">
@@ -47,7 +47,7 @@ export default function Navbar() {
               type="text"
               placeholder="Search here.."
               id="search"
-              onChange={(e) => searchTextHandler(e.target.value)}
+              onChange={(e) => searchByVideoTitle(e.target.value, filteredList)}
             />
             <button className="d-flex align-items-center border-none cursor-pointer">
               <FiSearch
