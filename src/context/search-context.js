@@ -18,8 +18,10 @@ const SearchContextProvider = ({ children }) => {
     });
 
     setFilteredList(filterArr);
+    setfilterAfterSearch(filterArr);
     if (categoryName === "all") {
       setFilteredList(videos);
+      setfilterAfterSearch(videos);
     }
   };
 
