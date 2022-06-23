@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, NavLink } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { getVideos } from "../../redux/reducers/video-listing/videosSlice";
@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { RiPlayListAddFill } from "react-icons/ri";
 import { toast } from "react-toastify";
+import PlaylistPortal from "../../PlaylistPortal";
 import {
   addVideoToLikes,
   removeVideosFromLikes,
@@ -28,7 +29,7 @@ export default function SingleVideo() {
       video.categoryName === filteredVideo.categoryName &&
       video._id !== filteredVideo._id
   );
-
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getVideos());
@@ -54,6 +55,9 @@ export default function SingleVideo() {
   }, [filteredVideo, isUserLoggedIn, videoid]);
   return (
     <div className="grid-layout-singlev mt-2 ml-2">
+      {showModal ? (
+        <PlaylistPortal setShowModal={setShowModal} video={filteredVideo} />
+      ) : null}
       <div>
         <div className="video-wrapper">
           <ReactPlayer
@@ -99,6 +103,7 @@ export default function SingleVideo() {
                 size={30}
                 className="white-text-color cursor-pointer icon"
                 title="Add to playlist"
+                onClick={() => setShowModal(true)}
               />
             </div>
           </div>
