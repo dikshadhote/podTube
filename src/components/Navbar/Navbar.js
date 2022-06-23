@@ -34,10 +34,15 @@ export default function Navbar() {
     <div>
       <div className="nav-bar black-light-shade-bg">
         <div className="nav-logo-section ">
-          <GiHamburgerMenu
-            className="white-text-color ml-2 fs-2 mr-5 cursor-pointer"
-            onClick={() => toggleSidebar()}
-          />
+          {currentNavLocation === "/login" ||
+          currentNavLocation === "/signup" ? (
+            ""
+          ) : (
+            <GiHamburgerMenu
+              className="white-text-color ml-2 fs-2 mr-5 cursor-pointer"
+              onClick={() => toggleSidebar()}
+            />
+          )}
           <div className="white-background size-yt-triangle pos-relative">
             <AiFillYoutube className="mr-1 red-yt-color fs-4 pos-abs-logo" />
           </div>
