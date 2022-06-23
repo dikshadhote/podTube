@@ -109,8 +109,6 @@ export default function Home() {
           All
         </span>
         {categories.map(({ categoryName }, idx) => {
-          console.log(currentTag, categoryName);
-          console.log(currentTag === categoryName);
           return (
             <span
               className={
