@@ -37,6 +37,7 @@ export default function Signup() {
               className="input input-login black-light-shade-bg  white-text-color"
               id="input-fname"
               placeholder="Loreum"
+              value="Diksha"
               onChange={(e) => {
                 let timer = setTimeout(() => {
                   setSignin({ ...signIn, firstName: e.target.value });
@@ -52,6 +53,7 @@ export default function Signup() {
             <input
               className="input input-login black-light-shade-bg  white-text-color"
               id="input-lname"
+              value="Dhote"
               placeholder="Ipsum"
               onChange={(e) => {
                 let timer = setTimeout(() => {
@@ -70,6 +72,7 @@ export default function Signup() {
               id="input-email"
               placeholder="you@dreamstore.com"
               type="email"
+              value="dikshadhote@podtube.com"
               onChange={(e) => {
                 let timer = setTimeout(() => {
                   setSignin({ ...signIn, email: e.target.value });
@@ -86,6 +89,7 @@ export default function Signup() {
               className="input input-login black-light-shade-bg  white-text-color"
               id="input-password"
               placeholder="*******"
+              value="diksha@123"
               type="password"
               onChange={(e) => {
                 let timer = setTimeout(() => {
