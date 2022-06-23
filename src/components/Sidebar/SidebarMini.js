@@ -1,6 +1,12 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { MdHome, MdVideoLibrary, MdThumbUp, MdHistory } from "react-icons/md";
+import {
+  MdHome,
+  MdVideoLibrary,
+  MdThumbUp,
+  MdHistory,
+  MdPlaylistAdd,
+} from "react-icons/md";
 
 export default function SidebarMini() {
   const location = useLocation();
@@ -53,6 +59,17 @@ export default function SidebarMini() {
         <small className="white-text-color font-weight-bold word-wrap ml-1">
           Watch Later
         </small>
+      </NavLink>
+      <NavLink
+        className={
+          location.pathname == "/playlist"
+            ? "d-flex flex-column p-2 cursor-pointer align-items-center flex-justify-center link-active"
+            : "d-flex  flex-column p-2 cursor-pointer align-items-center flex-justify-center sidebar-item"
+        }
+        to="/playlist"
+      >
+        <MdPlaylistAdd className="fs-3 white-text-color " />
+        <p className="white-text-color font-weight-bold">Playlist</p>
       </NavLink>
     </div>
   );
