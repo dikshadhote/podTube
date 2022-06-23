@@ -84,7 +84,7 @@ export default function Navbar() {
               >
                 account_circle
               </span>
-              <p className="ml-1">Login in</p>
+              <p className="ml-1">Login</p>
             </Link>
           )}
         </div>
