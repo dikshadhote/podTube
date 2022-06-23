@@ -98,7 +98,7 @@ export default function Signup() {
 
           <button
             type="submit"
-            className="btn orange-bg login-button ml-3 font-weight-bold"
+            className="btn blue-bg-sec login-button ml-3 font-weight-bold"
           >
             Create New Account
           </button>

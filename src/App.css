@@ -48,6 +48,10 @@ body {
   color: var(--blue-yt-action);
 }
 
+.blue-bg-sec {
+  background-color: var(--blue-yt-action);
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

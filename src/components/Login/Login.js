@@ -71,9 +71,15 @@ export default function Login() {
             </div>
             <button
               type="submit"
-              className="btn orange-bg login-button ml-3 font-weight-bold"
+              className="btn blue-bg-sec login-button ml-3 font-weight-bold"
             >
               Login
+            </button>
+            <button
+              type="submit"
+              className="btn blue-bg-sec login-button ml-3 font-weight-bold"
+            >
+              Guest login
             </button>
           </form>
           <div className="d-flex flex-justify-center align-items-center">
