@@ -1,10 +1,20 @@
 import React, { useEffect } from "react";
-import { getAllPlaylists } from "../../redux/reducers/playlist/playlistSlice";
+import {
+  getAllPlaylists,
+  deletePlaylist,
+} from "../../redux/reducers/playlist/playlistSlice";
 import { useSelector, useDispatch } from "react-redux";
-
+import { FaTrash } from "react-icons/fa";
 import VideoCard from "../VideoCard/VideoCard";
 export default function Playlist() {
   const playlistDispatch = useDispatch();
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
+
+  const deletePlaylistName = async (playlistId) => {
+    if (!isUserLoggedIn) return toast.error("Login to delete playlist");
+    await playlistDispatch(deletePlaylist(playlistId)).unwrap();
+    return toast.success("Removed playlist successfully!");
+  };
 
   useEffect(() => {
     playlistDispatch(getAllPlaylists());
@@ -18,10 +28,17 @@ export default function Playlist() {
           {playlistData.map((playlist) => {
             return (
               <div key={playlist._id}>
-                <div className="d-flex justify-content center white-text-color">
+                <div className="d-flex justify-content center align-items-center white-text-color">
                   <h4 className="mt-2 ml-2 white-text-color">
                     {playlist.title}
                   </h4>
+                  <FaTrash
+                    className="cursor-pointer white-text-color mt-2 ml-3  fs-1"
+                    title="delete playlist"
+                    onClick={() => {
+                      deletePlaylistName(playlist._id);
+                    }}
+                  />
                 </div>
                 <div className="d-flex flex-wrap">
                   {playlist.videos.map((video) => {
@@ -42,7 +59,7 @@ export default function Playlist() {
       ) : (
         <div className="d-flex justify-content center white-text-color">
           <h4 className="mt-2 ml-2">
-            Please create playlist from home page...
+            Please create playlist from home or video page...
           </h4>
         </div>
       )}
