@@ -3,7 +3,7 @@ import { AiFillYoutube } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSide } from "../../context/sidebar-context";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/reducers/auth/authSlice";
 import { useSearch } from "../../context/search-context";
@@ -14,6 +14,9 @@ export default function Navbar() {
     useSearch();
 
   const navigateTo = useNavigate();
+  const location = useLocation();
+  const currentNavLocation = location.pathname;
+
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedin);
   const logOutHandler = () => {
     localStorage.removeItem("token");
@@ -40,22 +43,28 @@ export default function Navbar() {
           </div>
           <p className="mr-4 ml-2 white-text-color brand-name">PodTube</p>
         </div>
-        <div>
-          <div className="border-none search-box d-flex border-radius">
-            <input
-              type="text"
-              placeholder="Search here.."
-              id="search"
-              onChange={(e) => searchByVideoTitle(e.target.value, filteredList)}
-            />
-            <button className="d-flex align-items-center border-none cursor-pointer">
-              <FiSearch
-                size={20}
-                onClick={() => searchByVideoTitle(searchValue, filteredList)}
+        {currentNavLocation === "/" ? (
+          <div>
+            <div className="border-none search-box d-flex border-radius">
+              <input
+                type="text"
+                placeholder="Search here.."
+                id="search"
+                onChange={(e) =>
+                  searchByVideoTitle(e.target.value, filteredList)
+                }
               />
-            </button>
+              <button className="d-flex align-items-center border-none cursor-pointer">
+                <FiSearch
+                  size={20}
+                  onClick={() => searchByVideoTitle(searchValue, filteredList)}
+                />
+              </button>
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
         <div className="nav-items">
           {isUserLoggedIn ? (
             <span
