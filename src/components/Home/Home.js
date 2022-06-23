@@ -96,8 +96,15 @@ export default function Home() {
       ) : null}
       <div className="mt-3 mb-1 ml-3 gray-border-chip-container pb-2 pt-2">
         <span
-          className="card-category-txt  white-text-color cursor-pointer"
-          onClick={() => sortByTag(videos, "all")}
+          className={
+            currentTag === "all" || currentTag === ""
+              ? "card-category-txt  white-text-color cursor-pointer tag-link link-active"
+              : "card-category-txt  white-text-color cursor-pointer"
+          }
+          onClick={() => {
+            sortByTag(videos, "all");
+            setCurrentTag("all");
+          }}
         >
           All
         </span>
