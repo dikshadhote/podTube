@@ -29,6 +29,7 @@ export default function Home() {
 
   const [showModal, setShowModal] = useState(false);
   const [currentVideo, setCurrentVideo] = useState({});
+  const [currentTag, setCurrentTag] = useState("");
   const dispatch = useDispatch();
   const likesDispatch = useDispatch();
   const watchLaterDispatch = useDispatch();
@@ -101,11 +102,20 @@ export default function Home() {
           All
         </span>
         {categories.map(({ categoryName }, idx) => {
+          console.log(currentTag, categoryName);
+          console.log(currentTag === categoryName);
           return (
             <span
-              className="card-category-txt  white-text-color cursor-pointer"
-              key={idx}
-              onClick={() => sortByTag(videos, categoryName)}
+              className={
+                currentTag === categoryName
+                  ? "card-category-txt  white-text-color cursor-pointer tag-link link-active"
+                  : "card-category-txt  white-text-color cursor-pointer"
+              }
+              key={`cat${idx}`}
+              onClick={() => {
+                sortByTag(videos, categoryName);
+                setCurrentTag(categoryName);
+              }}
             >
               {categoryName}
             </span>
