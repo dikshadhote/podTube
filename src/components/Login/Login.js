@@ -10,8 +10,8 @@ export default function Login() {
 
   const navigateTo = useNavigate();
   const guestCredential = {
-    email: "adarshbalika@gmail.com",
-    password: "adarshBalika123",
+    email: "dikshadhote@podtube.com",
+    password: "diksha@123",
   };
 
   const loginDispatch = useDispatch();
@@ -40,9 +40,9 @@ export default function Login() {
               <input
                 className="input input-login black-light-shade-bg white-text-color "
                 id="input-email"
-                placeholder="you@dreamstore.com"
+                placeholder="dikshadhote@podtube.com"
                 type="email"
-                value="adarshbalika@gmail.com"
+                value="dikshadhote@podtube.com"
                 onChange={(e) => {
                   let timer = setTimeout(() => {
                     setLogin({ ...login, email: e.target.value });
@@ -60,7 +60,7 @@ export default function Login() {
                 id="input-password"
                 placeholder="*******"
                 type="password"
-                value="adarshBalika123"
+                value="diksha@123"
                 onChange={(e) => {
                   let timer = setTimeout(() => {
                     setLogin({ ...login, password: e.target.value });

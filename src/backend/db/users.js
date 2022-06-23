@@ -16,4 +16,13 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
+  {
+    _id: uuid(),
+    firstName: "Diksha",
+    lastName: "Dhote",
+    email: "dikshadhote@podtube.com",
+    password: "diksha@123",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
 ];
